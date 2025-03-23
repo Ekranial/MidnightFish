@@ -1,0 +1,5 @@
+org\midnight\midnightFish\Utils\InitializeMobList.class
+org\midnight\midnightFish\MidnightFish.class
+org\midnight\midnightFish\Listeners\PickupFishedItem.class
+org\midnight\midnightFish\Listeners\Fish.class
+org\midnight\midnightFish\Listeners\Fish$1.class

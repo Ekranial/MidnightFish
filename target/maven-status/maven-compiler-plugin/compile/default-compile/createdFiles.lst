@@ -1,5 +1,10 @@
-org\midnight\midnightFish\Utils\InitializeMobList.class
+org\midnight\midnightFish\Listeners\FishMobs.class
 org\midnight\midnightFish\MidnightFish.class
+org\midnight\midnightFish\Utils\Compare.class
+org\midnight\midnightFish\Utils\InitializeMobList.class
+org\midnight\midnightFish\Listeners\FishMobs$1.class
+org\midnight\midnightFish\Utils\InitializeConfigValues.class
 org\midnight\midnightFish\Listeners\PickupFishedItem.class
-org\midnight\midnightFish\Listeners\Fish.class
-org\midnight\midnightFish\Listeners\Fish$1.class
+org\midnight\midnightFish\Utils\ProcUtilities.class
+org\midnight\midnightFish\Listeners\FishLoot.class
+org\midnight\midnightFish\Commands\Mfish.class

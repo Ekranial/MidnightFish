@@ -2,3 +2,5 @@ name: MidnightFish
 version: '1.0'
 main: org.midnight.midnightFish.MidnightFish
 api-version: '1.21'
+commands:
+  mfish:

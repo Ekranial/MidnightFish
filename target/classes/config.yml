@@ -1,0 +1,262 @@
+chances:
+  legendary: 1
+  epic: 8
+  rare: 20
+
+  big-weight: 10
+  medium-weight: 30
+
+  garbage: 13
+
+garbage:
+  common:
+    Snag: {}
+    Rotten_seaweed: {}
+    Broken_mirror: {}
+    Old_shoe: {}
+  rare:
+    Statuette: {}
+    Rusty_ring: {}
+
+colors:
+  legendary: "&6"
+  epic: "&d"
+  rare: "&b"
+  common: "&a"
+
+biomes:
+  PLAINS:
+    rare:
+      Catfish:
+        small-weight-interval: 5-10
+        medium-weight-interval: 10-30
+        big-weight-interval: 30-50
+    common:
+      Perch:
+        small-weight-interval: 0.2-0.5
+        medium-weight-interval: 0.5-1
+        big-weight-interval: 1-3
+      Goby:
+        small-weight-interval: 0.1-0.13
+        medium-weight-interval: 0.13-0.15
+        big-weight-interval: 0.15-0.2
+      Crucian_carp:
+        small-weight-interval: 0.05-0.08
+        medium-weight-interval: 0.08-0.13
+        big-weight-interval: 0.13-0.3
+
+  CHERRY_GROVE:
+    legendary:
+      Sturgeon:
+        small-weight-interval: 2-5
+        medium-weight-interval: 5-10
+        big-weight-interval: 10-13
+    rare:
+      Carp:
+        small-weight-interval: 1-3
+        medium-weight-interval: 3-7
+        big-weight-interval: 7-10
+      Catfish:
+        small-weight-interval: 5-10
+        medium-weight-interval: 10-30
+        big-weight-interval: 30-50
+    common:
+      Perch:
+        small-weight-interval: 0.2-0.5
+        medium-weight-interval: 0.5-1
+        big-weight-interval: 1-3
+
+  SAVANNA:
+    epic:
+      Cassowary_fish:
+        small-weight-interval: 0.076-0.12
+        medium-weight-interval: 0.12-0.17
+        big-weight-interval: 0.17-0.23
+      Tiger_fish:
+        small-weight-interval: 0.84-1.4
+        medium-weight-interval: 1.4-2
+        big-weight-interval: 2-4.4
+    rare:
+      Alesta:
+        small-weight-interval: 0.08-0.15
+        medium-weight-interval: 0.15-0.2
+        big-weight-interval: 0.2-0.55
+    common:
+      Perch:
+        small-weight-interval: 0.2-0.5
+        medium-weight-interval: 0.5-1
+        big-weight-interval: 1-3
+
+  SWAMP:
+    epic:
+      Swamp_fish:
+        small-weight-interval: 0.3-0.8
+        medium-weight-interval: 0.8-1.2
+        big-weight-interval: 1.2-1.7
+    rare:
+      Catfish:
+        small-weight-interval: 5-10
+        medium-weight-interval: 10-30
+        big-weight-interval: 30-50
+    common:
+      Crucian_carp:
+        small-weight-interval: 0.05-0.08
+        medium-weight-interval: 0.08-0.13
+        big-weight-interval: 0.13-0.3
+
+  OCEAN:
+    epic:
+      Flounder:
+        small-weight-interval: 3.8-5.2
+        medium-weight-interval: 5.2-7
+        big-weight-interval: 7-9.9
+    rare:
+      Scallop:
+        small-weight-interval: 0
+        medium-weight-interval: 0
+        big-weight-interval: 0
+    common:
+      Sardine:
+        small-weight-interval: 0.005-0.02
+        medium-weight-interval: 0.02-0.07
+        big-weight-interval: 0.07-0.14
+      Herring:
+        small-weight-interval: 0.55-0.8
+        medium-weight-interval: 0.8-1.1
+        big-weight-interval: 1.1-2.1
+      Anchovy:
+        small-weight-interval: 0.001-0.006
+        medium-weight-interval: 0.006-0.01
+        big-weight-interval: 0.01-0.03
+      Tuna:
+        small-weight-interval: 1.8-2.3
+        medium-weight-interval: 2.3-5.6
+        big-weight-interval: 5.6-6.1
+
+  WARM_OCEAN:
+    legendary:
+      Lobster:
+        small-weight-interval: 0.5-1.5
+        medium-weight-interval: 1.5-3
+        big-weight-interval: 3-4.5
+      Tiger_shark:
+        small-weight-interval: 60-135
+        medium-weight-interval: 135-300
+        big-weight-interval: 300-554
+    epic:
+      Octopus:
+        small-weight-interval: 2-5
+        medium-weight-interval: 5-10
+        big-weight-interval: 10-30
+      Squid:
+        small-weight-interval: 0.2-0.5
+        medium-weight-interval: 0.5-0.7
+        big-weight-interval: 0.7-1
+    common:
+      Shrimp:
+        small-weight-interval: 0.005-0.01
+        medium-weight-interval: 0.01-0.02
+        big-weight-interval: 0.02-0.035
+      Mussel:
+        small-weight-interval: 0.01-0.02
+        medium-weight-interval: 0.02-0.025
+        big-weight-interval: 0.025-0.03
+
+  COLD_OCEAN:
+    legendary:
+      Blob_fish:
+        small-weight-interval: 0.5-1
+        medium-weight-interval: 1-1.5
+        big-weight-interval: 1.5-2
+    epic:
+      Halibut:
+        small-weight-interval: 3-10
+        medium-weight-interval: 10-50
+        big-weight-interval: 50-200
+      Shark:
+        small-weight-interval: 100-500
+        medium-weight-interval: 500-1000
+        big-weight-interval: 1000-5000
+    rare:
+      Eel:
+        small-weight-interval: 0.6-5
+        medium-weight-interval: 5-10
+        big-weight-interval: 10-20
+    common:
+      Sea_urchin:
+        small-weight-interval: 0.05-0.1
+        medium-weight-interval: 0.1-0.15
+        big-weight-interval: 0.15-0.2
+      Red_mullet:
+        small-weight-interval: 0.05-0.1
+        medium-weight-interval: 0.1-0.2
+        big-weight-interval: 0.2-0.3
+
+  RIVER:
+    epic:
+      Pike:
+        small-weight-interval: 0.8-1.4
+        medium-weight-interval: 1.4-1.6
+        big-weight-interval: 1.6-2.2
+    rare:
+      Bream:
+        small-weight-interval: 3-5
+        medium-weight-interval: 5-6
+        big-weight-interval: 6-8
+      Catfish:
+        small-weight-interval: 5-10
+        medium-weight-interval: 10-30
+        big-weight-interval: 30-50
+    common:
+      Perch:
+        small-weight-interval: 0.2-0.5
+        medium-weight-interval: 0.5-1
+        big-weight-interval: 1-3
+      Zander:
+        small-weight-interval: 1-2
+        medium-weight-interval: 2-4
+        big-weight-interval: 4-5
+      Goby:
+        small-weight-interval: 0.1-0.13
+        medium-weight-interval: 0.13-0.15
+        big-weight-interval: 0.15-0.2
+
+translates:
+  Catfish: Сом
+  Perch: Окунь
+  Goby: Бычок
+  Crucian_carp: Карась
+  Carp: Карп
+  Sturgeon: Осётр
+  Som: Сом
+  Alesta: Алеста
+  Cassowary_fish: Рыба-Казуар
+  Tiger_fish: Тигровая рыба
+  Sardine: Сардина
+  Herring: Сельдь
+  Flounder: Камбала
+  Anchovy: Анчоус
+  Tuna: Тунец
+  Scallop: Гребешок
+  Shrimp: Креветка
+  Mussel: Мидия
+  Lobster: Омар
+  Octopus: Осьминог
+  Squid: Кальмар
+  Tiger_shark: Тигровая акула
+  Sea_urchin: Морской Ёж
+  Eel: Угорь
+  Blob_fish: Рыба-капля
+  Halibut: Палтус
+  Red_mullet: Барабулька
+  Shark: Акула
+  Bream: Лещ
+  Zander: Судак
+  Pike: Щука
+  Old_shoe: Старый ботинок
+  Statuette: Статуэтка
+  Snag: Коряга
+  Rotten_seaweed: Тухлая водоросль
+  Broken_mirror: Разбитое зеркальце
+  Rusty_ring: Ржавое Кольцо
+  Swamp_fish: Болотная рыба

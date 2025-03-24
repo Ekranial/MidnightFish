@@ -1,30 +1,30 @@
 package org.midnight.midnightFish.Listeners;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerFishEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import static org.midnight.midnightFish.MidnightFish.pl;
 import static org.midnight.midnightFish.Utils.InitializeMobList.MobTypes;
 
-public class Fish implements Listener {
+public class FishMobs implements Listener {
 
     @EventHandler
     public static void FishCatch(PlayerFishEvent event) {
         if (event.getState().equals(PlayerFishEvent.State.CAUGHT_FISH)) {
 
+            if (event.getPlayer().getInventory().getItem(event.getHand()).getPersistentDataContainer().has(new NamespacedKey(pl, "specialrod"))) {
+//                event.getPlayer().sendMessage("Special rod");
+                return;
+            }
+//            Bukkit.getLogger().info(String.valueOf(event.getPlayer().getInventory().getItem(event.getHand())));
             int num = new Random().nextInt(100) + 1;
             if (!(1 <= num && num <= 3)) return;
 

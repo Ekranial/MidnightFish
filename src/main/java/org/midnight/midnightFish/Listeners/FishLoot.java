@@ -1,10 +1,12 @@
 package org.midnight.midnightFish.Listeners;
 
+import it.unimi.dsi.fastutil.Pair;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.MemorySection;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
@@ -84,17 +86,20 @@ public class FishLoot implements Listener {
         itemMeta.setItemName(ChatColor.translateAlternateColorCodes('&',
                 RarityColors.getOrDefault(rarity, "&f") +
                         Translates.getOrDefault(ItemName, ItemName)));
-        String weight = GetFishWeight(biome, rarity, ItemName);
-        itemMeta.setLore(Collections.singletonList((ChatColor.GRAY + weight + " кг")));
+        Pair<String, String> WeightPair = GetFishWeight(biome, rarity, ItemName);
+        itemMeta.setLore(Collections.singletonList((ChatColor.GRAY + WeightPair.left() + " кг")));
+        int CustomModelData = GetFishModel(biome, rarity, ItemName, WeightPair.right());
+        itemMeta.setCustomModelData(CustomModelData);
+
         itemStack.setItemMeta(itemMeta);
 
-        UpdateLeaderstats(player, ItemName, Double.parseDouble(weight));
+        UpdateLeaderstats(player, ItemName, Double.parseDouble(WeightPair.left()));
 
         Item item = (Item) event.getCaught();
         item.setItemStack(itemStack);
     }
 
-    public static String GetFishWeight(String biome, String fish_rarity, String fish) {
+    public static Pair<String, String> GetFishWeight(String biome, String fish_rarity, String fish) {
         for (String Rarity : new ArrayList<String>(Arrays.asList("big", "medium"))) {
             if (Proc(WeightChances.get(Rarity))) {
                 double w1 = Double.parseDouble(pl.getConfig().getString("biomes." + biome + "." + fish_rarity +
@@ -106,7 +111,7 @@ public class FishLoot implements Listener {
                 df.setRoundingMode(RoundingMode.FLOOR);
 
                 Random random = new Random();
-                return df.format(random.nextDouble(w1, w2));
+                return Pair.of(df.format(random.nextDouble(w1, w2)), Rarity);
             }
         }
         String Rarity = "small";
@@ -119,7 +124,14 @@ public class FishLoot implements Listener {
         df.setRoundingMode(RoundingMode.FLOOR);
 
         Random random = new Random();
-        return df.format(random.nextDouble(w1, w2));
+        return Pair.of(df.format(random.nextDouble(w1, w2)), Rarity);
+    }
+
+    public static int GetFishModel(String biome, String fish_rarity, String fish, String weight_rarity) {
+        ConfigurationSection CurrentFishSection = pl.getConfig().getConfigurationSection("biomes." + biome + "." + fish_rarity +
+                "." + fish);
+        if (!CurrentFishSection.contains(weight_rarity + "-model")) return 1;
+        return (CurrentFishSection.getInt(weight_rarity + "-model"));
     }
 
     public static void UpdateLeaderstats(Player player, String fish, double weight) {

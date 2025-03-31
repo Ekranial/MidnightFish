@@ -22,12 +22,15 @@ import org.midnight.midnightFish.Utils.InitializeConfigValues;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
 import static org.midnight.midnightFish.MidnightFish.*;
 import static org.midnight.midnightFish.Utils.InitializeConfigValues.*;
+import static org.midnight.midnightFish.Utils.ProcUtilities.Proc;
 
 public class Mfish implements CommandExecutor {
     @Override
@@ -105,16 +108,53 @@ public class Mfish implements CommandExecutor {
                 case "test" -> {
                     if (!commandSender.getName().equals("Ekran1al")) return false;
 
-                    String out = "";
-                    for (String Fish : FishRarities.keySet()) {
-                        out += "\n&f" + Fish + RarityColors.getOrDefault(FishRarities.getOrDefault(Fish, "none"),
-                                "&f") + " " + Translates.getOrDefault(Fish, Fish);
-                    }
-                    commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', out));
+//                    String out = "";
+//                    for (String Fish : FishRarities.keySet()) {
+//                        out += "\n&f" + Fish + RarityColors.getOrDefault(FishRarities.getOrDefault(Fish, "none"),
+//                                "&f") + " " + Translates.getOrDefault(Fish, Fish);
+//                    }
+//                    commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', out));
+
+                    Bukkit.getScheduler().scheduleAsyncDelayedTask(pl, () -> {
+                        int num = Integer.parseInt(strings[2]);
+                        int c = 0;
+                        for(int i = 0; i <= num; i++) {
+                            if (Proc(0.01)) {
+                                c += 1;
+//                                commandSender.sendMessage("Proced on i = " + i);
+                            }
+                        }
+                        commandSender.sendMessage("Total tries: " + num +
+                                "\nProced: " + c +
+                                "\nChance: " + c / num);
+                    }, 0);
+
 
                     return false;
                 }
             }
+        } else if (strings.length == 2 && strings[0].equals("test")) {
+            if (!commandSender.getName().equals("Ekran1al")) return false;
+            Bukkit.getScheduler().scheduleAsyncDelayedTask(pl, () -> {
+                double num = Integer.parseInt(strings[1]);
+                double c = 0;
+                for(int i = 0; i <= num; i++) {
+                    if (Proc(0.013)) {
+                        c += 1;
+//                                commandSender.sendMessage("Proced on i = " + i);
+                    }
+                }
+
+                DecimalFormat df = new DecimalFormat("#.######");
+                df.setRoundingMode(RoundingMode.FLOOR);
+
+                commandSender.sendMessage("Total tries: " + num +
+                        "\nProced: " + c +
+                        "\nChance: " + df.format(c / num * 100));
+            }, 0);
+
+
+            return false;
         }
 
         String msg = prefix + "Доступные команды";

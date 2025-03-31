@@ -2,9 +2,7 @@ package org.midnight.midnightFish.Utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
-import static org.midnight.midnightFish.MidnightFish.LeaderstatsConfig;
 import static org.midnight.midnightFish.MidnightFish.pl;
 
 public class InitializeConfigValues {

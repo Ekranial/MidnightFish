@@ -2,6 +2,7 @@ D:\files\Java\MidnightFish\src\main\java\org\midnight\midnightFish\Commands\Mfis
 D:\files\Java\MidnightFish\src\main\java\org\midnight\midnightFish\Listeners\FishLoot.java
 D:\files\Java\MidnightFish\src\main\java\org\midnight\midnightFish\Listeners\FishMobs.java
 D:\files\Java\MidnightFish\src\main\java\org\midnight\midnightFish\Listeners\PickupFishedItem.java
+D:\files\Java\MidnightFish\src\main\java\org\midnight\midnightFish\Listeners\PrepareCraft.java
 D:\files\Java\MidnightFish\src\main\java\org\midnight\midnightFish\MidnightFish.java
 D:\files\Java\MidnightFish\src\main\java\org\midnight\midnightFish\Utils\Compare.java
 D:\files\Java\MidnightFish\src\main\java\org\midnight\midnightFish\Utils\InitializeConfigValues.java

@@ -10,6 +10,7 @@ import org.midnight.midnightFish.Commands.Mfish;
 import org.midnight.midnightFish.Listeners.FishLoot;
 import org.midnight.midnightFish.Listeners.FishMobs;
 import org.midnight.midnightFish.Listeners.PickupFishedItem;
+import org.midnight.midnightFish.Listeners.PrepareCraft;
 import org.midnight.midnightFish.Utils.InitializeConfigValues;
 import org.midnight.midnightFish.Utils.InitializeMobList;
 
@@ -33,6 +34,7 @@ public final class MidnightFish extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new FishMobs(), this);
         Bukkit.getPluginManager().registerEvents(new PickupFishedItem(), this);
         Bukkit.getPluginManager().registerEvents(new FishLoot(), this);
+        Bukkit.getPluginManager().registerEvents(new PrepareCraft(), this);
 
         Bukkit.getPluginCommand("mfish").setExecutor(new Mfish());
 

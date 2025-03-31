@@ -31,6 +31,10 @@ biomes:
         small-weight-interval: 5-10
         medium-weight-interval: 10-30
         big-weight-interval: 30-50
+
+        small-model: 1
+        medium-model: 2
+        big-model: 3
     common:
       Perch:
         small-weight-interval: 0.2-0.5

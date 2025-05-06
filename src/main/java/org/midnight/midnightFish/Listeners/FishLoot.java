@@ -1,13 +1,10 @@
 package org.midnight.midnightFish.Listeners;
 
 import it.unimi.dsi.fastutil.Pair;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.MemorySection;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,14 +14,15 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
-import java.io.IOException;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.*;
 
 import static org.midnight.midnightFish.MidnightFish.*;
 import static org.midnight.midnightFish.Utils.InitializeConfigValues.*;
-import static org.midnight.midnightFish.Utils.ProcUtilities.Proc;
+import static org.midnight.midnightFish.Utils.Leaderstats.UpdateLeaderstats;
+import static org.midnight.midnightFish.Utils.Levels.UpdateLevel;
+import static org.midnight.midnightFish.Utils.ProcUtils.Proc;
 
 public class FishLoot implements Listener {
     @EventHandler
@@ -94,6 +92,7 @@ public class FishLoot implements Listener {
         itemStack.setItemMeta(itemMeta);
 
         UpdateLeaderstats(player, ItemName, Double.parseDouble(WeightPair.left()));
+        UpdateLevel(player, ItemName);
 
         Item item = (Item) event.getCaught();
         item.setItemStack(itemStack);
@@ -132,42 +131,5 @@ public class FishLoot implements Listener {
                 "." + fish);
         if (!CurrentFishSection.contains(weight_rarity + "-model")) return 1;
         return (CurrentFishSection.getInt(weight_rarity + "-model"));
-    }
-
-    public static void UpdateLeaderstats(Player player, String fish, double weight) {
-        ConfigurationSection CurrentFishSection;
-        if (!LeaderstatsConfig.getKeys(false).contains(fish)) {
-            CurrentFishSection = LeaderstatsConfig.createSection(fish);
-
-            CurrentFishSection.set("player", player.getName());
-            CurrentFishSection.set("weight", weight);
-
-            String prefix = "&7[&aMFish&7] &f";
-            String out = prefix + "&aНовый рекорд";
-            out += "\n" + RarityColors.getOrDefault(FishRarities.getOrDefault(fish, "common"), "&f") +
-                    Translates.getOrDefault(fish, fish) + "&f | &7" + player.getName() + "&f | &7" + weight + " кг";
-            Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', out));
-        } else {
-            CurrentFishSection = LeaderstatsConfig.getConfigurationSection(fish);
-
-            if (CurrentFishSection.getDouble("weight") < weight) {
-                CurrentFishSection.set("player", player.getName());
-                CurrentFishSection.set("weight", weight);
-
-                String prefix = "&7[&aMFish&7] &f";
-                String out = prefix + "&aНовый рекорд";
-                out += "\n" + RarityColors.getOrDefault(FishRarities.getOrDefault(fish, "common"), "&f") +
-                        Translates.getOrDefault(fish, fish) + "&f | &7" + player.getName() + "&f | &7" + weight + " кг";
-                Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', out));
-
-            }
-        }
-
-
-        try {
-            LeaderstatsConfig.save(LeaderstatsConfigFile);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

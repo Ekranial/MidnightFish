@@ -13,24 +13,16 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
-import org.bukkit.plugin.Plugin;
-import org.checkerframework.checker.units.qual.C;
 import org.jetbrains.annotations.NotNull;
-import org.midnight.midnightFish.MidnightFish;
-import org.midnight.midnightFish.Utils.Compare;
 import org.midnight.midnightFish.Utils.InitializeConfigValues;
 
-import java.io.File;
 import java.io.IOException;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 
 import static org.midnight.midnightFish.MidnightFish.*;
 import static org.midnight.midnightFish.Utils.InitializeConfigValues.*;
-import static org.midnight.midnightFish.Utils.ProcUtilities.Proc;
+import static org.midnight.midnightFish.Utils.Leaderstats.GetLsValues;
+import static org.midnight.midnightFish.Utils.Levels.GetPlrLvl;
 
 public class Mfish implements CommandExecutor {
     @Override
@@ -38,6 +30,27 @@ public class Mfish implements CommandExecutor {
 //        if (!commandSender.isOp()) return false;
 
         String prefix = "&7[&aMFish&7] &f";
+
+        if (strings.length == 0) {
+            String msg = prefix + "Доступные команды";
+            if (commandSender.isOp()) {
+                msg += "\n&6/mfish reload";
+                msg += "\n&aПерезагрузить конфигурацию плагина";
+
+                msg += "\n&6/mfish sp";
+                msg += "\n&aСделать удочку в руке &6специальной";
+            }
+            msg += "\n&6/mfish ls";
+            msg += "\n&aУзнать списки лидеров";
+
+            msg += "\n&6/mfish lvl";
+            msg += "\n&aУзнать ваш уровень и опыт";
+//            System.out.println("aboba");
+            commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
+
+            return false;
+        }
+
         if (strings.length == 1) {
             switch (strings[0]) {
                 case "sp" -> {
@@ -63,6 +76,7 @@ public class Mfish implements CommandExecutor {
 
                     try {
                         LeaderstatsConfig.load(LeaderstatsConfigFile);
+                        LevelsConfig.load(LevelsConfigFile);
                     } catch (IOException | InvalidConfigurationException e) {
                         throw new RuntimeException(e);
                     }
@@ -77,16 +91,7 @@ public class Mfish implements CommandExecutor {
                     Player player = (Player) commandSender;
 
                     String out = prefix + "&aТаблица лидеров";
-                    ArrayList<Pair<String, Pair<String, Double>>> LsValues = new ArrayList<>();
-                    for (String Fish : LeaderstatsConfig.getKeys(false)) {
-
-                        String PlayerName = LeaderstatsConfig.getString(Fish + ".player");
-                        double weight = LeaderstatsConfig.getDouble(Fish + ".weight");
-
-                        Pair<String, Pair<String, Double>> FishPair = Pair.of(Fish, Pair.of(PlayerName, weight));
-                        LsValues.add(FishPair);
-                    }
-                    LsValues.sort(new Compare());
+                    ArrayList<Pair<String, Pair<String, Double>>> LsValues = GetLsValues();
 
                     if (LsValues.isEmpty()) {
                         player.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + "&cНихуя нет"));
@@ -105,55 +110,68 @@ public class Mfish implements CommandExecutor {
 
                     return false;
                 }
-                case "test" -> {
-                    if (!commandSender.getName().equals("Ekran1al")) return false;
+                case "lvl", "level" -> {
 
-//                    String out = "";
-//                    for (String Fish : FishRarities.keySet()) {
-//                        out += "\n&f" + Fish + RarityColors.getOrDefault(FishRarities.getOrDefault(Fish, "none"),
-//                                "&f") + " " + Translates.getOrDefault(Fish, Fish);
-//                    }
-//                    commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', out));
-
-                    Bukkit.getScheduler().scheduleAsyncDelayedTask(pl, () -> {
-                        int num = Integer.parseInt(strings[2]);
-                        int c = 0;
-                        for(int i = 0; i <= num; i++) {
-                            if (Proc(0.01)) {
-                                c += 1;
-//                                commandSender.sendMessage("Proced on i = " + i);
-                            }
-                        }
-                        commandSender.sendMessage("Total tries: " + num +
-                                "\nProced: " + c +
-                                "\nChance: " + c / num);
-                    }, 0);
-
+                    Pair<Integer, Double> LvlExp = GetPlrLvl(commandSender.getName());
+                    String out = prefix + "Ваши статы"
+                            + "\n&aУровень &7[&6&l" + LvlExp.first() + "&f&7]"
+                            + "\n&aОпыт &7[&6&l" + LvlExp.second() + "&f&7]";
+                    commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', out));
 
                     return false;
                 }
+//                case "test" -> {
+//                    if (!commandSender.getName().equals("Ekran1al")) return false;
+//
+////                    String out = "";
+////                    for (String Fish : FishRarities.keySet()) {
+////                        out += "\n&f" + Fish + RarityColors.getOrDefault(FishRarities.getOrDefault(Fish, "none"),
+////                                "&f") + " " + Translates.getOrDefault(Fish, Fish);
+////                    }
+////                    commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', out));
+//
+//                    Bukkit.getScheduler().scheduleAsyncDelayedTask(pl, () -> {
+//                        int num = Integer.parseInt(strings[2]);
+//                        int c = 0;
+//                        for(int i = 0; i <= num; i++) {
+//                            if (Proc(0.01)) {
+//                                c += 1;
+////                                commandSender.sendMessage("Proced on i = " + i);
+//                            }
+//                        }
+//                        commandSender.sendMessage("Total tries: " + num +
+//                                "\nProced: " + c +
+//                                "\nChance: " + c / num);
+//                    }, 0);
+//
+//
+//                    return false;
+//                }
             }
-        } else if (strings.length == 2 && strings[0].equals("test")) {
-            if (!commandSender.getName().equals("Ekran1al")) return false;
-            Bukkit.getScheduler().scheduleAsyncDelayedTask(pl, () -> {
-                double num = Integer.parseInt(strings[1]);
-                double c = 0;
-                for(int i = 0; i <= num; i++) {
-                    if (Proc(0.013)) {
-                        c += 1;
-//                                commandSender.sendMessage("Proced on i = " + i);
-                    }
-                }
+        }
+        System.out.println("123123");
+        if (strings[0].equals("test")) {
 
-                DecimalFormat df = new DecimalFormat("#.######");
-                df.setRoundingMode(RoundingMode.FLOOR);
+            TestCmd.execute((Player) commandSender);
 
-                commandSender.sendMessage("Total tries: " + num +
-                        "\nProced: " + c +
-                        "\nChance: " + df.format(c / num * 100));
-            }, 0);
-
-
+//            if (!commandSender.getName().equals("Ekran1al")) return false;
+//            Bukkit.getScheduler().scheduleAsyncDelayedTask(pl, () -> {
+//                double num = Integer.parseInt(strings[1]);
+//                double c = 0;
+//                for(int i = 0; i <= num; i++) {
+//                    if (Proc(0.013)) {
+//                        c += 1;
+////                                commandSender.sendMessage("Proced on i = " + i);
+//                    }
+//                }
+//
+//                DecimalFormat df = new DecimalFormat("#.######");
+//                df.setRoundingMode(RoundingMode.FLOOR);
+//
+//                commandSender.sendMessage("Total tries: " + num +
+//                        "\nProced: " + c +
+//                        "\nChance: " + df.format(c / num * 100));
+//            }, 0);
             return false;
         }
 
@@ -167,6 +185,9 @@ public class Mfish implements CommandExecutor {
         }
         msg += "\n&6/mfish ls";
         msg += "\n&aУзнать списки лидеров";
+
+        msg += "\n&6/mfish lvl";
+        msg += "\n&aУзнать ваш уровень и опыт";
         System.out.println("aboba");
         commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
 

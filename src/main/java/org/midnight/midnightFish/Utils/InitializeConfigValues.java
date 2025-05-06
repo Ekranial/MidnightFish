@@ -7,6 +7,10 @@ import static org.midnight.midnightFish.MidnightFish.pl;
 
 public class InitializeConfigValues {
 
+    public static int BaseLevel;
+    public static int MaxLevel;
+    public static HashMap<Integer, Integer> RequiredExp = new HashMap<>();
+    public static HashMap<String, Double> RarityExp = new HashMap<>();
     public static HashMap<String, Double> RarityChances = new HashMap<>();
     public static HashMap<String, Double> WeightChances = new HashMap<>();
     public static double GarbageChance;
@@ -52,6 +56,19 @@ public class InitializeConfigValues {
             RarityColors.put(Rarity, pl.getConfig().getString("colors." + Rarity));
         }
 
+        for (String rarity : pl.getConfig().getConfigurationSection("exp").getKeys(false)) {
+            RarityExp.put(rarity, pl.getConfig().getDouble("exp." + rarity));
+        }
+
+        BaseLevel = pl.getConfig().getInt("levels.base");
+        MaxLevel = pl.getConfig().getInt("levels.max");
+
+        for (int lvl = BaseLevel + 1; lvl <= MaxLevel; ++lvl){
+            RequiredExp.put(lvl, pl.getConfig().getInt("levels." + lvl));
+        }
+
+//        System.out.println(RarityExp.get("legendary"));
+//        System.out.println(RequiredExp);
 //        System.out.println(RarityColors);
 //        System.out.println(Translates);
 //        System.out.println(Biomes);

@@ -4,7 +4,7 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.Random;
 
-public class ProcUtilities {
+public class ProcUtils {
 
     public static Random random = new Random();
 

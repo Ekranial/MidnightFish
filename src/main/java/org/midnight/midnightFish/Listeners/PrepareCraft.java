@@ -16,7 +16,8 @@ public class PrepareCraft implements Listener {
         for (ItemStack itemStack : event.getInventory().getMatrix()) {
             if (itemStack != null) {
                 if (itemStack.getPersistentDataContainer().has(new NamespacedKey(pl, "fishdrop")) ||
-                        itemStack.getPersistentDataContainer().has(new NamespacedKey(pl, "garbagedrop"))) {
+                        itemStack.getPersistentDataContainer().has(new NamespacedKey(pl, "garbagedrop")) ||
+                        itemStack.getPersistentDataContainer().has(new NamespacedKey(pl, "treasuredrop"))) {
                     if (event.getInventory().getResult() != null) {
                         if (event.getInventory().getResult().getType().equals(Material.IRON_INGOT)) {
                             event.getInventory().setResult(new ItemStack(Material.AIR));

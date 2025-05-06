@@ -149,7 +149,7 @@ public class FishLoot implements Listener {
 
         ItemStack itemStack = new ItemStack(Material.IRON_NUGGET);
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.getPersistentDataContainer().set(new NamespacedKey(pl, "treasurerop"), PersistentDataType.STRING, ItemName);
+        itemMeta.getPersistentDataContainer().set(new NamespacedKey(pl, "treasuredrop"), PersistentDataType.STRING, ItemName);
         itemMeta.setItemName(ChatColor.translateAlternateColorCodes('&',
                 RarityColors.getOrDefault(treasure.Rarity, "&f") +
                         Translates.getOrDefault(ItemName, ItemName)));

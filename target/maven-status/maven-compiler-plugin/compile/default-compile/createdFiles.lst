@@ -1,10 +1,12 @@
 org\midnight\midnightFish\Utils\ProcUtils.class
 org\midnight\midnightFish\Listeners\FishMobs.class
 org\midnight\midnightFish\MidnightFish.class
-org\midnight\midnightFish\Utils\Compare.class
 org\midnight\midnightFish\Utils\InitializeMobList.class
 org\midnight\midnightFish\Listeners\PrepareCraft.class
 org\midnight\midnightFish\Listeners\FishMobs$1.class
+org\midnight\midnightFish\Treasures\Treasure.class
+org\midnight\midnightFish\Utils\CompareFish.class
+org\midnight\midnightFish\Utils\CompareTreasure.class
 org\midnight\midnightFish\Utils\InitializeConfigValues.class
 org\midnight\midnightFish\Listeners\PickupFishedItem.class
 org\midnight\midnightFish\Listeners\TradeListener.class

@@ -6,7 +6,9 @@ D:\files\Java\MidnightFish\src\main\java\org\midnight\midnightFish\Listeners\Pic
 D:\files\Java\MidnightFish\src\main\java\org\midnight\midnightFish\Listeners\PrepareCraft.java
 D:\files\Java\MidnightFish\src\main\java\org\midnight\midnightFish\Listeners\TradeListener.java
 D:\files\Java\MidnightFish\src\main\java\org\midnight\midnightFish\MidnightFish.java
-D:\files\Java\MidnightFish\src\main\java\org\midnight\midnightFish\Utils\Compare.java
+D:\files\Java\MidnightFish\src\main\java\org\midnight\midnightFish\Treasures\Treasure.java
+D:\files\Java\MidnightFish\src\main\java\org\midnight\midnightFish\Utils\CompareFish.java
+D:\files\Java\MidnightFish\src\main\java\org\midnight\midnightFish\Utils\CompareTreasure.java
 D:\files\Java\MidnightFish\src\main\java\org\midnight\midnightFish\Utils\InitializeConfigValues.java
 D:\files\Java\MidnightFish\src\main\java\org\midnight\midnightFish\Utils\InitializeMobList.java
 D:\files\Java\MidnightFish\src\main\java\org\midnight\midnightFish\Utils\Leaderstats.java

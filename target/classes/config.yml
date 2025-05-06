@@ -8,6 +8,17 @@ chances:
 
   garbage: 13
 
+lvl_req:
+  rare: 3
+  epic: 8
+  legendary: 15
+
+treasures:
+  Depth_pearl:
+    rarity: legendary
+    chance: 1
+    lvl: 18
+
 garbage:
   common:
     Snag: {}
@@ -25,7 +36,7 @@ colors:
   common: "&a"
 
 biomes:
-  PLAINS:
+  SNOWY_PLAINS:
     rare:
       Catfish:
         small-weight-interval: 5-10
@@ -49,7 +60,55 @@ biomes:
         medium-weight-interval: 0.08-0.13
         big-weight-interval: 0.13-0.3
 
-  CHERRY_GROVE:
+  SNOWY_TAIGA:
+    rare:
+      Catfish:
+        small-weight-interval: 5-10
+        medium-weight-interval: 10-30
+        big-weight-interval: 30-50
+
+        small-model: 1
+        medium-model: 2
+        big-model: 3
+    common:
+      Perch:
+        small-weight-interval: 0.2-0.5
+        medium-weight-interval: 0.5-1
+        big-weight-interval: 1-3
+      Goby:
+        small-weight-interval: 0.1-0.13
+        medium-weight-interval: 0.13-0.15
+        big-weight-interval: 0.15-0.2
+      Crucian_carp:
+        small-weight-interval: 0.05-0.08
+        medium-weight-interval: 0.08-0.13
+        big-weight-interval: 0.13-0.3
+
+  FROZEN_RIVER:
+    rare:
+      Catfish:
+        small-weight-interval: 5-10
+        medium-weight-interval: 10-30
+        big-weight-interval: 30-50
+
+        small-model: 1
+        medium-model: 2
+        big-model: 3
+    common:
+      Perch:
+        small-weight-interval: 0.2-0.5
+        medium-weight-interval: 0.5-1
+        big-weight-interval: 1-3
+      Goby:
+        small-weight-interval: 0.1-0.13
+        medium-weight-interval: 0.13-0.15
+        big-weight-interval: 0.15-0.2
+      Crucian_carp:
+        small-weight-interval: 0.05-0.08
+        medium-weight-interval: 0.08-0.13
+        big-weight-interval: 0.13-0.3
+
+  TAIGA:
     legendary:
       Sturgeon:
         small-weight-interval: 2-5
@@ -70,7 +129,91 @@ biomes:
         medium-weight-interval: 0.5-1
         big-weight-interval: 1-3
 
-  SAVANNA:
+  OLD_GROWTH_PINE_TAIGA:
+    legendary:
+      Sturgeon:
+        small-weight-interval: 2-5
+        medium-weight-interval: 5-10
+        big-weight-interval: 10-13
+    rare:
+      Carp:
+        small-weight-interval: 1-3
+        medium-weight-interval: 3-7
+        big-weight-interval: 7-10
+      Catfish:
+        small-weight-interval: 5-10
+        medium-weight-interval: 10-30
+        big-weight-interval: 30-50
+    common:
+      Perch:
+        small-weight-interval: 0.2-0.5
+        medium-weight-interval: 0.5-1
+        big-weight-interval: 1-3
+
+  OLD_GROWTH_SPRUCE_TAIGA:
+    legendary:
+      Sturgeon:
+        small-weight-interval: 2-5
+        medium-weight-interval: 5-10
+        big-weight-interval: 10-13
+    rare:
+      Carp:
+        small-weight-interval: 1-3
+        medium-weight-interval: 3-7
+        big-weight-interval: 7-10
+      Catfish:
+        small-weight-interval: 5-10
+        medium-weight-interval: 10-30
+        big-weight-interval: 30-50
+    common:
+      Perch:
+        small-weight-interval: 0.2-0.5
+        medium-weight-interval: 0.5-1
+        big-weight-interval: 1-3
+
+  COLD_OCEAN:
+    legendary:
+      Sturgeon:
+        small-weight-interval: 2-5
+        medium-weight-interval: 5-10
+        big-weight-interval: 10-13
+    rare:
+      Carp:
+        small-weight-interval: 1-3
+        medium-weight-interval: 3-7
+        big-weight-interval: 7-10
+      Catfish:
+        small-weight-interval: 5-10
+        medium-weight-interval: 10-30
+        big-weight-interval: 30-50
+    common:
+      Perch:
+        small-weight-interval: 0.2-0.5
+        medium-weight-interval: 0.5-1
+        big-weight-interval: 1-3
+
+  DEEP_COLD_OCEAN:
+    legendary:
+      Sturgeon:
+        small-weight-interval: 2-5
+        medium-weight-interval: 5-10
+        big-weight-interval: 10-13
+    rare:
+      Carp:
+        small-weight-interval: 1-3
+        medium-weight-interval: 3-7
+        big-weight-interval: 7-10
+      Catfish:
+        small-weight-interval: 5-10
+        medium-weight-interval: 10-30
+        big-weight-interval: 30-50
+    common:
+      Perch:
+        small-weight-interval: 0.2-0.5
+        medium-weight-interval: 0.5-1
+        big-weight-interval: 1-3
+
+  PLAINS:
     epic:
       Cassowary_fish:
         small-weight-interval: 0.076-0.12
@@ -91,7 +234,91 @@ biomes:
         medium-weight-interval: 0.5-1
         big-weight-interval: 1-3
 
-  SWAMP:
+  OCEAN:
+    epic:
+      Cassowary_fish:
+        small-weight-interval: 0.076-0.12
+        medium-weight-interval: 0.12-0.17
+        big-weight-interval: 0.17-0.23
+      Tiger_fish:
+        small-weight-interval: 0.84-1.4
+        medium-weight-interval: 1.4-2
+        big-weight-interval: 2-4.4
+    rare:
+      Alesta:
+        small-weight-interval: 0.08-0.15
+        medium-weight-interval: 0.15-0.2
+        big-weight-interval: 0.2-0.55
+    common:
+      Perch:
+        small-weight-interval: 0.2-0.5
+        medium-weight-interval: 0.5-1
+        big-weight-interval: 1-3
+
+  DEEP_OCEAN:
+    epic:
+      Cassowary_fish:
+        small-weight-interval: 0.076-0.12
+        medium-weight-interval: 0.12-0.17
+        big-weight-interval: 0.17-0.23
+      Tiger_fish:
+        small-weight-interval: 0.84-1.4
+        medium-weight-interval: 1.4-2
+        big-weight-interval: 2-4.4
+    rare:
+      Alesta:
+        small-weight-interval: 0.08-0.15
+        medium-weight-interval: 0.15-0.2
+        big-weight-interval: 0.2-0.55
+    common:
+      Perch:
+        small-weight-interval: 0.2-0.5
+        medium-weight-interval: 0.5-1
+        big-weight-interval: 1-3
+
+  LUKEWARM_OCEAN:
+    epic:
+      Cassowary_fish:
+        small-weight-interval: 0.076-0.12
+        medium-weight-interval: 0.12-0.17
+        big-weight-interval: 0.17-0.23
+      Tiger_fish:
+        small-weight-interval: 0.84-1.4
+        medium-weight-interval: 1.4-2
+        big-weight-interval: 2-4.4
+    rare:
+      Alesta:
+        small-weight-interval: 0.08-0.15
+        medium-weight-interval: 0.15-0.2
+        big-weight-interval: 0.2-0.55
+    common:
+      Perch:
+        small-weight-interval: 0.2-0.5
+        medium-weight-interval: 0.5-1
+        big-weight-interval: 1-3
+
+  DEEP_LUKEWARM_OCEAN:
+    epic:
+      Cassowary_fish:
+        small-weight-interval: 0.076-0.12
+        medium-weight-interval: 0.12-0.17
+        big-weight-interval: 0.17-0.23
+      Tiger_fish:
+        small-weight-interval: 0.84-1.4
+        medium-weight-interval: 1.4-2
+        big-weight-interval: 2-4.4
+    rare:
+      Alesta:
+        small-weight-interval: 0.08-0.15
+        medium-weight-interval: 0.15-0.2
+        big-weight-interval: 0.2-0.55
+    common:
+      Perch:
+        small-weight-interval: 0.2-0.5
+        medium-weight-interval: 0.5-1
+        big-weight-interval: 1-3
+
+  SAVANNA:
     epic:
       Swamp_fish:
         small-weight-interval: 0.3-0.8
@@ -108,7 +335,75 @@ biomes:
         medium-weight-interval: 0.08-0.13
         big-weight-interval: 0.13-0.3
 
-  OCEAN:
+  SAVANNA_PLATEAU:
+    epic:
+      Swamp_fish:
+        small-weight-interval: 0.3-0.8
+        medium-weight-interval: 0.8-1.2
+        big-weight-interval: 1.2-1.7
+    rare:
+      Catfish:
+        small-weight-interval: 5-10
+        medium-weight-interval: 10-30
+        big-weight-interval: 30-50
+    common:
+      Crucian_carp:
+        small-weight-interval: 0.05-0.08
+        medium-weight-interval: 0.08-0.13
+        big-weight-interval: 0.13-0.3
+
+  WARM_OCEAN:
+    epic:
+      Swamp_fish:
+        small-weight-interval: 0.3-0.8
+        medium-weight-interval: 0.8-1.2
+        big-weight-interval: 1.2-1.7
+    rare:
+      Catfish:
+        small-weight-interval: 5-10
+        medium-weight-interval: 10-30
+        big-weight-interval: 30-50
+    common:
+      Crucian_carp:
+        small-weight-interval: 0.05-0.08
+        medium-weight-interval: 0.08-0.13
+        big-weight-interval: 0.13-0.3
+
+  BADLANDS:
+    epic:
+      Swamp_fish:
+        small-weight-interval: 0.3-0.8
+        medium-weight-interval: 0.8-1.2
+        big-weight-interval: 1.2-1.7
+    rare:
+      Catfish:
+        small-weight-interval: 5-10
+        medium-weight-interval: 10-30
+        big-weight-interval: 30-50
+    common:
+      Crucian_carp:
+        small-weight-interval: 0.05-0.08
+        medium-weight-interval: 0.08-0.13
+        big-weight-interval: 0.13-0.3
+
+  BEACH:
+    epic:
+      Swamp_fish:
+        small-weight-interval: 0.3-0.8
+        medium-weight-interval: 0.8-1.2
+        big-weight-interval: 1.2-1.7
+    rare:
+      Catfish:
+        small-weight-interval: 5-10
+        medium-weight-interval: 10-30
+        big-weight-interval: 30-50
+    common:
+      Crucian_carp:
+        small-weight-interval: 0.05-0.08
+        medium-weight-interval: 0.08-0.13
+        big-weight-interval: 0.13-0.3
+
+  LUSH_CAVES:
     epic:
       Flounder:
         small-weight-interval: 3.8-5.2
@@ -116,9 +411,9 @@ biomes:
         big-weight-interval: 7-9.9
     rare:
       Scallop:
-        small-weight-interval: 0
-        medium-weight-interval: 0
-        big-weight-interval: 0
+        small-weight-interval: 0.15-0.2
+        medium-weight-interval: 0.2-0.36
+        big-weight-interval: 0.36-0.4
     common:
       Sardine:
         small-weight-interval: 0.005-0.02
@@ -137,7 +432,36 @@ biomes:
         medium-weight-interval: 2.3-5.6
         big-weight-interval: 5.6-6.1
 
-  WARM_OCEAN:
+  DEEP_DARK:
+    epic:
+      Flounder:
+        small-weight-interval: 3.8-5.2
+        medium-weight-interval: 5.2-7
+        big-weight-interval: 7-9.9
+    rare:
+      Scallop:
+        small-weight-interval: 0.15-0.2
+        medium-weight-interval: 0.2-0.36
+        big-weight-interval: 0.36-0.4
+    common:
+      Sardine:
+        small-weight-interval: 0.005-0.02
+        medium-weight-interval: 0.02-0.07
+        big-weight-interval: 0.07-0.14
+      Herring:
+        small-weight-interval: 0.55-0.8
+        medium-weight-interval: 0.8-1.1
+        big-weight-interval: 1.1-2.1
+      Anchovy:
+        small-weight-interval: 0.001-0.006
+        medium-weight-interval: 0.006-0.01
+        big-weight-interval: 0.01-0.03
+      Tuna:
+        small-weight-interval: 1.8-2.3
+        medium-weight-interval: 2.3-5.6
+        big-weight-interval: 5.6-6.1
+
+  MOUNTAIN_GROVE:
     legendary:
       Lobster:
         small-weight-interval: 0.5-1.5
@@ -166,7 +490,123 @@ biomes:
         medium-weight-interval: 0.02-0.025
         big-weight-interval: 0.025-0.03
 
-  COLD_OCEAN:
+  SNOWY_SLOPES:
+    legendary:
+      Lobster:
+        small-weight-interval: 0.5-1.5
+        medium-weight-interval: 1.5-3
+        big-weight-interval: 3-4.5
+      Tiger_shark:
+        small-weight-interval: 60-135
+        medium-weight-interval: 135-300
+        big-weight-interval: 300-554
+    epic:
+      Octopus:
+        small-weight-interval: 2-5
+        medium-weight-interval: 5-10
+        big-weight-interval: 10-30
+      Squid:
+        small-weight-interval: 0.2-0.5
+        medium-weight-interval: 0.5-0.7
+        big-weight-interval: 0.7-1
+    common:
+      Shrimp:
+        small-weight-interval: 0.005-0.01
+        medium-weight-interval: 0.01-0.02
+        big-weight-interval: 0.02-0.035
+      Mussel:
+        small-weight-interval: 0.01-0.02
+        medium-weight-interval: 0.02-0.025
+        big-weight-interval: 0.025-0.03
+
+  FROZEN_PEAKS:
+    legendary:
+      Lobster:
+        small-weight-interval: 0.5-1.5
+        medium-weight-interval: 1.5-3
+        big-weight-interval: 3-4.5
+      Tiger_shark:
+        small-weight-interval: 60-135
+        medium-weight-interval: 135-300
+        big-weight-interval: 300-554
+    epic:
+      Octopus:
+        small-weight-interval: 2-5
+        medium-weight-interval: 5-10
+        big-weight-interval: 10-30
+      Squid:
+        small-weight-interval: 0.2-0.5
+        medium-weight-interval: 0.5-0.7
+        big-weight-interval: 0.7-1
+    common:
+      Shrimp:
+        small-weight-interval: 0.005-0.01
+        medium-weight-interval: 0.01-0.02
+        big-weight-interval: 0.02-0.035
+      Mussel:
+        small-weight-interval: 0.01-0.02
+        medium-weight-interval: 0.02-0.025
+        big-weight-interval: 0.025-0.03
+
+  JAGGED_PEAKS:
+    legendary:
+      Lobster:
+        small-weight-interval: 0.5-1.5
+        medium-weight-interval: 1.5-3
+        big-weight-interval: 3-4.5
+      Tiger_shark:
+        small-weight-interval: 60-135
+        medium-weight-interval: 135-300
+        big-weight-interval: 300-554
+    epic:
+      Octopus:
+        small-weight-interval: 2-5
+        medium-weight-interval: 5-10
+        big-weight-interval: 10-30
+      Squid:
+        small-weight-interval: 0.2-0.5
+        medium-weight-interval: 0.5-0.7
+        big-weight-interval: 0.7-1
+    common:
+      Shrimp:
+        small-weight-interval: 0.005-0.01
+        medium-weight-interval: 0.01-0.02
+        big-weight-interval: 0.02-0.035
+      Mussel:
+        small-weight-interval: 0.01-0.02
+        medium-weight-interval: 0.02-0.025
+        big-weight-interval: 0.025-0.03
+
+  MOUNTAIN_MEADOW:
+    legendary:
+      Lobster:
+        small-weight-interval: 0.5-1.5
+        medium-weight-interval: 1.5-3
+        big-weight-interval: 3-4.5
+      Tiger_shark:
+        small-weight-interval: 60-135
+        medium-weight-interval: 135-300
+        big-weight-interval: 300-554
+    epic:
+      Octopus:
+        small-weight-interval: 2-5
+        medium-weight-interval: 5-10
+        big-weight-interval: 10-30
+      Squid:
+        small-weight-interval: 0.2-0.5
+        medium-weight-interval: 0.5-0.7
+        big-weight-interval: 0.7-1
+    common:
+      Shrimp:
+        small-weight-interval: 0.005-0.01
+        medium-weight-interval: 0.01-0.02
+        big-weight-interval: 0.02-0.035
+      Mussel:
+        small-weight-interval: 0.01-0.02
+        medium-weight-interval: 0.02-0.025
+        big-weight-interval: 0.025-0.03
+
+  RIVER:
     legendary:
       Blob_fish:
         small-weight-interval: 0.5-1
@@ -196,7 +636,216 @@ biomes:
         medium-weight-interval: 0.1-0.2
         big-weight-interval: 0.2-0.3
 
-  RIVER:
+  FOREST:
+    legendary:
+      Blob_fish:
+        small-weight-interval: 0.5-1
+        medium-weight-interval: 1-1.5
+        big-weight-interval: 1.5-2
+    epic:
+      Halibut:
+        small-weight-interval: 3-10
+        medium-weight-interval: 10-50
+        big-weight-interval: 50-200
+      Shark:
+        small-weight-interval: 100-500
+        medium-weight-interval: 500-1000
+        big-weight-interval: 1000-5000
+    rare:
+      Eel:
+        small-weight-interval: 0.6-5
+        medium-weight-interval: 5-10
+        big-weight-interval: 10-20
+    common:
+      Sea_urchin:
+        small-weight-interval: 0.05-0.1
+        medium-weight-interval: 0.1-0.15
+        big-weight-interval: 0.15-0.2
+      Red_mullet:
+        small-weight-interval: 0.05-0.1
+        medium-weight-interval: 0.1-0.2
+        big-weight-interval: 0.2-0.3
+
+  CHERRY_GROVE:
+    legendary:
+      Blob_fish:
+        small-weight-interval: 0.5-1
+        medium-weight-interval: 1-1.5
+        big-weight-interval: 1.5-2
+    epic:
+      Halibut:
+        small-weight-interval: 3-10
+        medium-weight-interval: 10-50
+        big-weight-interval: 50-200
+      Shark:
+        small-weight-interval: 100-500
+        medium-weight-interval: 500-1000
+        big-weight-interval: 1000-5000
+    rare:
+      Eel:
+        small-weight-interval: 0.6-5
+        medium-weight-interval: 5-10
+        big-weight-interval: 10-20
+    common:
+      Sea_urchin:
+        small-weight-interval: 0.05-0.1
+        medium-weight-interval: 0.1-0.15
+        big-weight-interval: 0.15-0.2
+      Red_mullet:
+        small-weight-interval: 0.05-0.1
+        medium-weight-interval: 0.1-0.2
+        big-weight-interval: 0.2-0.3
+
+  BIRCH_FOREST:
+    legendary:
+      Blob_fish:
+        small-weight-interval: 0.5-1
+        medium-weight-interval: 1-1.5
+        big-weight-interval: 1.5-2
+    epic:
+      Halibut:
+        small-weight-interval: 3-10
+        medium-weight-interval: 10-50
+        big-weight-interval: 50-200
+      Shark:
+        small-weight-interval: 100-500
+        medium-weight-interval: 500-1000
+        big-weight-interval: 1000-5000
+    rare:
+      Eel:
+        small-weight-interval: 0.6-5
+        medium-weight-interval: 5-10
+        big-weight-interval: 10-20
+    common:
+      Sea_urchin:
+        small-weight-interval: 0.05-0.1
+        medium-weight-interval: 0.1-0.15
+        big-weight-interval: 0.15-0.2
+      Red_mullet:
+        small-weight-interval: 0.05-0.1
+        medium-weight-interval: 0.1-0.2
+        big-weight-interval: 0.2-0.3
+
+  DARK_FOREST:
+    legendary:
+      Blob_fish:
+        small-weight-interval: 0.5-1
+        medium-weight-interval: 1-1.5
+        big-weight-interval: 1.5-2
+    epic:
+      Halibut:
+        small-weight-interval: 3-10
+        medium-weight-interval: 10-50
+        big-weight-interval: 50-200
+      Shark:
+        small-weight-interval: 100-500
+        medium-weight-interval: 500-1000
+        big-weight-interval: 1000-5000
+    rare:
+      Eel:
+        small-weight-interval: 0.6-5
+        medium-weight-interval: 5-10
+        big-weight-interval: 10-20
+    common:
+      Sea_urchin:
+        small-weight-interval: 0.05-0.1
+        medium-weight-interval: 0.1-0.15
+        big-weight-interval: 0.15-0.2
+      Red_mullet:
+        small-weight-interval: 0.05-0.1
+        medium-weight-interval: 0.1-0.2
+        big-weight-interval: 0.2-0.3
+
+  MANGROVE_SWAMP:
+    legendary:
+      Blob_fish:
+        small-weight-interval: 0.5-1
+        medium-weight-interval: 1-1.5
+        big-weight-interval: 1.5-2
+    epic:
+      Halibut:
+        small-weight-interval: 3-10
+        medium-weight-interval: 10-50
+        big-weight-interval: 50-200
+      Shark:
+        small-weight-interval: 100-500
+        medium-weight-interval: 500-1000
+        big-weight-interval: 1000-5000
+    rare:
+      Eel:
+        small-weight-interval: 0.6-5
+        medium-weight-interval: 5-10
+        big-weight-interval: 10-20
+    common:
+      Sea_urchin:
+        small-weight-interval: 0.05-0.1
+        medium-weight-interval: 0.1-0.15
+        big-weight-interval: 0.15-0.2
+      Red_mullet:
+        small-weight-interval: 0.05-0.1
+        medium-weight-interval: 0.1-0.2
+        big-weight-interval: 0.2-0.3
+
+  JUNGLE:
+    legendary:
+      Blob_fish:
+        small-weight-interval: 0.5-1
+        medium-weight-interval: 1-1.5
+        big-weight-interval: 1.5-2
+    epic:
+      Halibut:
+        small-weight-interval: 3-10
+        medium-weight-interval: 10-50
+        big-weight-interval: 50-200
+      Shark:
+        small-weight-interval: 100-500
+        medium-weight-interval: 500-1000
+        big-weight-interval: 1000-5000
+    rare:
+      Eel:
+        small-weight-interval: 0.6-5
+        medium-weight-interval: 5-10
+        big-weight-interval: 10-20
+    common:
+      Sea_urchin:
+        small-weight-interval: 0.05-0.1
+        medium-weight-interval: 0.1-0.15
+        big-weight-interval: 0.15-0.2
+      Red_mullet:
+        small-weight-interval: 0.05-0.1
+        medium-weight-interval: 0.1-0.2
+        big-weight-interval: 0.2-0.3
+
+  THE_END:
+    epic:
+      Pike:
+        small-weight-interval: 0.8-1.4
+        medium-weight-interval: 1.4-1.6
+        big-weight-interval: 1.6-2.2
+    rare:
+      Bream:
+        small-weight-interval: 3-5
+        medium-weight-interval: 5-6
+        big-weight-interval: 6-8
+      Catfish:
+        small-weight-interval: 5-10
+        medium-weight-interval: 10-30
+        big-weight-interval: 30-50
+    common:
+      Perch:
+        small-weight-interval: 0.2-0.5
+        medium-weight-interval: 0.5-1
+        big-weight-interval: 1-3
+      Zander:
+        small-weight-interval: 1-2
+        medium-weight-interval: 2-4
+        big-weight-interval: 4-5
+      Goby:
+        small-weight-interval: 0.1-0.13
+        medium-weight-interval: 0.13-0.15
+        big-weight-interval: 0.15-0.2
+
+  END_HIGHLANDS:
     epic:
       Pike:
         small-weight-interval: 0.8-1.4
@@ -264,6 +913,7 @@ translates:
   Broken_mirror: Разбитое зеркальце
   Rusty_ring: Ржавое Кольцо
   Swamp_fish: Болотная рыба
+  Depth_pearl: Глубинная жемчужина
 
 exp:
   legendary: 25

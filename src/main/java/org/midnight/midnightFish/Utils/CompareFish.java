@@ -3,13 +3,12 @@ package org.midnight.midnightFish.Utils;
 import it.unimi.dsi.fastutil.Pair;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
 import static org.midnight.midnightFish.Utils.InitializeConfigValues.FishRarities;
 
-public class Compare implements Comparator<Pair<String, Pair<String, Double>>> {
+public class CompareFish implements Comparator<Pair<String, Pair<String, Double>>> {
 
     @Override
     public int compare(Pair<String, Pair<String, Double>> o1, Pair<String, Pair<String, Double>> o2) {

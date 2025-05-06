@@ -1,5 +1,8 @@
 package org.midnight.midnightFish.Utils;
 
+import org.bukkit.configuration.ConfigurationSection;
+import org.midnight.midnightFish.Treasures.Treasure;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -9,8 +12,10 @@ public class InitializeConfigValues {
 
     public static int BaseLevel;
     public static int MaxLevel;
+    public static ArrayList<Treasure> Treasures = new ArrayList<>();
     public static HashMap<Integer, Integer> RequiredExp = new HashMap<>();
     public static HashMap<String, Double> RarityExp = new HashMap<>();
+    public static HashMap<String, Integer> RarityLvlReq = new HashMap<>();
     public static HashMap<String, Double> RarityChances = new HashMap<>();
     public static HashMap<String, Double> WeightChances = new HashMap<>();
     public static double GarbageChance;
@@ -63,10 +68,23 @@ public class InitializeConfigValues {
         BaseLevel = pl.getConfig().getInt("levels.base");
         MaxLevel = pl.getConfig().getInt("levels.max");
 
-        for (int lvl = BaseLevel + 1; lvl <= MaxLevel; ++lvl){
+        for (int lvl = BaseLevel + 1; lvl <= MaxLevel; ++lvl) {
             RequiredExp.put(lvl, pl.getConfig().getInt("levels." + lvl));
         }
 
+        for (String rarity : pl.getConfig().getConfigurationSection("lvl_req").getKeys(false)) {
+            RarityLvlReq.put(rarity, pl.getConfig().getInt("lvl_req." + rarity));
+        }
+
+        for (String name : pl.getConfig().getConfigurationSection("treasures").getKeys(false)) {
+            ConfigurationSection CurTreasure = pl.getConfig().getConfigurationSection("treasures." + name);
+            Treasure treasure = new Treasure(name, CurTreasure.getString("rarity"), CurTreasure.getDouble("chance"),
+                    CurTreasure.getInt("lvl"));
+            Treasures.add(treasure);
+        }
+        Treasures.sort(new CompareTreasure());
+
+        System.out.println(Treasures.get(0).DropChance);
 //        System.out.println(RarityExp.get("legendary"));
 //        System.out.println(RequiredExp);
 //        System.out.println(RarityColors);

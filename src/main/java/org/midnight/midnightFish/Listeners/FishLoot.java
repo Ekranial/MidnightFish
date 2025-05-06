@@ -13,6 +13,7 @@ import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
+import org.midnight.midnightFish.Treasures.Treasure;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -21,6 +22,7 @@ import java.util.*;
 import static org.midnight.midnightFish.MidnightFish.*;
 import static org.midnight.midnightFish.Utils.InitializeConfigValues.*;
 import static org.midnight.midnightFish.Utils.Leaderstats.UpdateLeaderstats;
+import static org.midnight.midnightFish.Utils.Levels.GetPlrLvl;
 import static org.midnight.midnightFish.Utils.Levels.UpdateLevel;
 import static org.midnight.midnightFish.Utils.ProcUtils.Proc;
 
@@ -36,6 +38,14 @@ public class FishLoot implements Listener {
             Player player = event.getPlayer();
             String biome = event.getHook().getLocation().getBlock().getBiome().toString();
 //            player.sendMessage(biome);
+
+            for (Treasure treasure : Treasures) {
+                if (Proc(treasure.DropChance) && GetPlrLvl(player.getName()).first() >= treasure.LvlReq) {
+                    GrantTreasureLoot(event, player, treasure);
+                    return;
+                }
+            }
+
             if (Proc(GarbageChance) || !Biomes.containsKey(biome)) {
                 for (String Rarity : new ArrayList<String>(Arrays.asList("legendary", "epic", "rare"))) {
                     if (Proc(RarityChances.get(Rarity)) && !Garbage.get(Rarity).isEmpty()) {
@@ -46,7 +56,8 @@ public class FishLoot implements Listener {
                 GrantGarbageLoot(event, player, "common");
             } else {
                 for (String Rarity : new ArrayList<String>(Arrays.asList("legendary", "epic", "rare"))) {
-                    if (Proc(RarityChances.get(Rarity)) && !Biomes.get(biome).get(Rarity).isEmpty()) {
+                    if (Proc(RarityChances.get(Rarity)) && !Biomes.get(biome).get(Rarity).isEmpty() &&
+                    GetPlrLvl(player.getName()).first() >= RarityLvlReq.get(Rarity)) {
                         GrantFishLoot(event, biome, player, Rarity);
                         return;
                     }
@@ -131,5 +142,21 @@ public class FishLoot implements Listener {
                 "." + fish);
         if (!CurrentFishSection.contains(weight_rarity + "-model")) return 1;
         return (CurrentFishSection.getInt(weight_rarity + "-model"));
+    }
+
+    public static void GrantTreasureLoot(PlayerFishEvent event, Player player, Treasure treasure) {
+        String ItemName = treasure.Name;
+
+        ItemStack itemStack = new ItemStack(Material.IRON_NUGGET);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.getPersistentDataContainer().set(new NamespacedKey(pl, "treasurerop"), PersistentDataType.STRING, ItemName);
+        itemMeta.setItemName(ChatColor.translateAlternateColorCodes('&',
+                RarityColors.getOrDefault(treasure.Rarity, "&f") +
+                        Translates.getOrDefault(ItemName, ItemName)));
+
+        itemStack.setItemMeta(itemMeta);
+
+        Item item = (Item) event.getCaught();
+        item.setItemStack(itemStack);
     }
 }

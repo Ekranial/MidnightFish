@@ -84,7 +84,7 @@ public class Leaderstats {
             Pair<String, Pair<String, Double>> FishPair = Pair.of(Fish, Pair.of(PlayerName, weight));
             LsValues.add(FishPair);
         }
-        LsValues.sort(new Compare());
+        LsValues.sort(new CompareFish());
         return LsValues;
     }
 }

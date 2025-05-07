@@ -13,6 +13,7 @@ import static org.midnight.midnightFish.MidnightFish.pl;
 
 public class InitializeConfigValues {
 
+    public static String RpUrl;
     public static ArrayList<String> RarityList = new ArrayList<>(List.of("legendary", "epic", "rare", "common"));
     public static int BaseLevel;
     public static int MaxLevel;
@@ -32,6 +33,8 @@ public class InitializeConfigValues {
     public static void Init() {
 
         ClearData();
+
+        RpUrl = pl.getConfig().getString("rp");
 
         RarityChances.put("legendary", pl.getConfig().getDouble("chances.legendary"));
         RarityChances.put("epic", pl.getConfig().getDouble("chances.epic"));

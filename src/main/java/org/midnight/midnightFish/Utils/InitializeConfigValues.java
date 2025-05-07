@@ -1,15 +1,19 @@
 package org.midnight.midnightFish.Utils;
 
 import org.bukkit.configuration.ConfigurationSection;
+import org.midnight.midnightFish.Garbage.Garbage;
 import org.midnight.midnightFish.Treasures.Treasure;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import static org.midnight.midnightFish.MidnightFish.pl;
 
 public class InitializeConfigValues {
 
+    public static ArrayList<String> RarityList = new ArrayList<>(List.of("legendary", "epic", "rare", "common"));
     public static int BaseLevel;
     public static int MaxLevel;
     public static ArrayList<Treasure> Treasures = new ArrayList<>();
@@ -20,12 +24,15 @@ public class InitializeConfigValues {
     public static HashMap<String, Double> WeightChances = new HashMap<>();
     public static double GarbageChance;
     public static HashMap<String, HashMap<String, ArrayList<String>>> Biomes = new HashMap<>();
-    public static HashMap<String, ArrayList<String>> Garbage = new HashMap<>();
+    public static HashMap<String, ArrayList<org.midnight.midnightFish.Garbage.Garbage>> Garbage = new HashMap<>();
     public static HashMap<String, String> Translates = new HashMap<>();
     public static HashMap<String, String> RarityColors = new HashMap<>();
     public static HashMap<String, String> FishRarities = new HashMap<>();
 
     public static void Init() {
+
+        ClearData();
+
         RarityChances.put("legendary", pl.getConfig().getDouble("chances.legendary"));
         RarityChances.put("epic", pl.getConfig().getDouble("chances.epic"));
         RarityChances.put("rare", pl.getConfig().getDouble("chances.rare"));
@@ -47,9 +54,17 @@ public class InitializeConfigValues {
             Biomes.put(biome, Rarities);
         }
 
-        Garbage = GetDefaultRaritiesHashMap();
-        for (String rarity : pl.getConfig().getConfigurationSection("garbage").getKeys(false)) {
-            ArrayList<String> CurrentRarityGarbage = new ArrayList<>(pl.getConfig().getConfigurationSection("garbage." + rarity).getKeys(false));
+        Garbage = GetDefaultRaritiesGarbageHashMap();
+        for (String rarity : RarityList) {
+            ArrayList<Garbage> CurrentRarityGarbage = new ArrayList<>();
+            if (!pl.getConfig().contains("garbage." + rarity)) continue;
+            for (String name : pl.getConfig().getConfigurationSection("garbage." + rarity).getKeys(false)) {
+                org.midnight.midnightFish.Garbage.Garbage CurGarbage = new Garbage(name, rarity, null);
+                if (pl.getConfig().contains("garbage." + rarity + "." + name + ".model")) {
+                    CurGarbage.CustomModelData = pl.getConfig().getString("garbage." + rarity + "." + name + ".model");
+                }
+                CurrentRarityGarbage.add(CurGarbage);
+            }
             Garbage.put(rarity, CurrentRarityGarbage);
         }
 
@@ -79,12 +94,15 @@ public class InitializeConfigValues {
         for (String name : pl.getConfig().getConfigurationSection("treasures").getKeys(false)) {
             ConfigurationSection CurTreasure = pl.getConfig().getConfigurationSection("treasures." + name);
             Treasure treasure = new Treasure(name, CurTreasure.getString("rarity"), CurTreasure.getDouble("chance"),
-                    CurTreasure.getInt("lvl"));
+                    CurTreasure.getInt("lvl"), null);
+            if (CurTreasure.contains("model")) {
+                treasure.CustomModelData = CurTreasure.getString("model");
+            }
             Treasures.add(treasure);
         }
         Treasures.sort(new CompareTreasure());
 
-        System.out.println(Treasures.get(0).DropChance);
+//        System.out.println(Treasures.get(0).CustomModelData);
 //        System.out.println(RarityExp.get("legendary"));
 //        System.out.println(RequiredExp);
 //        System.out.println(RarityColors);
@@ -101,5 +119,29 @@ public class InitializeConfigValues {
         rarities.put("common", new ArrayList<>());
 
         return rarities;
+    }
+
+    public static HashMap<String, ArrayList<Garbage>> GetDefaultRaritiesGarbageHashMap() {
+        HashMap<String, ArrayList<Garbage>> rarities = new HashMap<>();
+        rarities.put("legendary", new ArrayList<>());
+        rarities.put("epic", new ArrayList<>());
+        rarities.put("rare", new ArrayList<>());
+        rarities.put("common", new ArrayList<>());
+
+        return rarities;
+    }
+
+    public static void ClearData() {
+        Treasures.clear();
+        RequiredExp.clear();
+        RarityExp.clear();
+        RarityLvlReq.clear();
+        RarityChances.clear();
+        WeightChances.clear();
+        Biomes.clear();
+        Garbage.clear();
+        Translates.clear();
+        RarityColors.clear();
+        FishRarities.clear();
     }
 }

@@ -149,29 +149,10 @@ public class Mfish implements CommandExecutor {
 //                }
             }
         }
-        System.out.println("123123");
         if (strings[0].equals("test")) {
 
             TestCmd.execute((Player) commandSender);
 
-//            if (!commandSender.getName().equals("Ekran1al")) return false;
-//            Bukkit.getScheduler().scheduleAsyncDelayedTask(pl, () -> {
-//                double num = Integer.parseInt(strings[1]);
-//                double c = 0;
-//                for(int i = 0; i <= num; i++) {
-//                    if (Proc(0.013)) {
-//                        c += 1;
-////                                commandSender.sendMessage("Proced on i = " + i);
-//                    }
-//                }
-//
-//                DecimalFormat df = new DecimalFormat("#.######");
-//                df.setRoundingMode(RoundingMode.FLOOR);
-//
-//                commandSender.sendMessage("Total tries: " + num +
-//                        "\nProced: " + c +
-//                        "\nChance: " + df.format(c / num * 100));
-//            }, 0);
             return false;
         }
 

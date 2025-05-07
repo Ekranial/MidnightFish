@@ -8,7 +8,9 @@ org\midnight\midnightFish\Treasures\Treasure.class
 org\midnight\midnightFish\Utils\CompareFish.class
 org\midnight\midnightFish\Utils\CompareTreasure.class
 org\midnight\midnightFish\Utils\InitializeConfigValues.class
+org\midnight\midnightFish\Garbage\Garbage.class
 org\midnight\midnightFish\Listeners\PickupFishedItem.class
+org\midnight\midnightFish\Listeners\PlayerJoin.class
 org\midnight\midnightFish\Listeners\TradeListener.class
 org\midnight\midnightFish\Utils\Levels.class
 org\midnight\midnightFish\Utils\Leaderstats.class

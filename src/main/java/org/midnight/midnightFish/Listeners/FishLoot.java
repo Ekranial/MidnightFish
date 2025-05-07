@@ -12,7 +12,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.components.CustomModelDataComponent;
 import org.bukkit.persistence.PersistentDataType;
+import org.midnight.midnightFish.Garbage.Garbage;
 import org.midnight.midnightFish.Treasures.Treasure;
 
 import java.math.RoundingMode;
@@ -68,9 +70,10 @@ public class FishLoot implements Listener {
     }
 
     public static void GrantGarbageLoot(PlayerFishEvent event, Player player, String rarity) {
-        ArrayList<String> LootList = Garbage.get(rarity);
+        ArrayList<org.midnight.midnightFish.Garbage.Garbage> LootList = Garbage.get(rarity);
         Random random = new Random();
-        String ItemName = LootList.get(random.nextInt(LootList.size()));
+        org.midnight.midnightFish.Garbage.Garbage CurGarbage = LootList.get(random.nextInt(LootList.size()));
+        String ItemName = CurGarbage.Name;
 
         ItemStack itemStack = new ItemStack(Material.IRON_NUGGET);
         ItemMeta itemMeta = itemStack.getItemMeta();
@@ -78,6 +81,13 @@ public class FishLoot implements Listener {
         itemMeta.setItemName(ChatColor.translateAlternateColorCodes('&',
                 RarityColors.getOrDefault(rarity, "&f") +
                         Translates.getOrDefault(ItemName, ItemName)));
+
+        if (CurGarbage.CustomModelData != null) {
+            CustomModelDataComponent customModelDataComponent = itemMeta.getCustomModelDataComponent();
+            customModelDataComponent.setStrings(Collections.singletonList(CurGarbage.CustomModelData));
+            itemMeta.setCustomModelDataComponent(customModelDataComponent);
+        }
+
         itemStack.setItemMeta(itemMeta);
 
         Item item = (Item) event.getCaught();
@@ -97,8 +107,9 @@ public class FishLoot implements Listener {
                         Translates.getOrDefault(ItemName, ItemName)));
         Pair<String, String> WeightPair = GetFishWeight(biome, rarity, ItemName);
         itemMeta.setLore(Collections.singletonList((ChatColor.GRAY + WeightPair.left() + " кг")));
-        int CustomModelData = GetFishModel(biome, rarity, ItemName, WeightPair.right());
-        itemMeta.setCustomModelData(CustomModelData);
+        CustomModelDataComponent customModelDataComponent = itemMeta.getCustomModelDataComponent();
+        customModelDataComponent.setStrings(Collections.singletonList(GetFishModel(biome, rarity, ItemName, WeightPair.right())));
+        itemMeta.setCustomModelDataComponent(customModelDataComponent);
 
         itemStack.setItemMeta(itemMeta);
 
@@ -137,11 +148,11 @@ public class FishLoot implements Listener {
         return Pair.of(df.format(random.nextDouble(w1, w2)), Rarity);
     }
 
-    public static int GetFishModel(String biome, String fish_rarity, String fish, String weight_rarity) {
+    public static String GetFishModel(String biome, String fish_rarity, String fish, String weight_rarity) {
         ConfigurationSection CurrentFishSection = pl.getConfig().getConfigurationSection("biomes." + biome + "." + fish_rarity +
                 "." + fish);
-        if (!CurrentFishSection.contains(weight_rarity + "-model")) return 1;
-        return (CurrentFishSection.getInt(weight_rarity + "-model"));
+        if (!CurrentFishSection.contains(weight_rarity + "-model")) return "iron_nugget";
+        return (CurrentFishSection.getString(weight_rarity + "-model"));
     }
 
     public static void GrantTreasureLoot(PlayerFishEvent event, Player player, Treasure treasure) {
@@ -154,8 +165,14 @@ public class FishLoot implements Listener {
                 RarityColors.getOrDefault(treasure.Rarity, "&f") +
                         Translates.getOrDefault(ItemName, ItemName)));
 
-        itemStack.setItemMeta(itemMeta);
+//        System.out.println(treasure.CustomModelData);
+        if (treasure.CustomModelData != null) {
+            CustomModelDataComponent customModelDataComponent = itemMeta.getCustomModelDataComponent();
+            customModelDataComponent.setStrings(Collections.singletonList(treasure.CustomModelData));
+            itemMeta.setCustomModelDataComponent(customModelDataComponent);
+        }
 
+        itemStack.setItemMeta(itemMeta);
         Item item = (Item) event.getCaught();
         item.setItemStack(itemStack);
     }

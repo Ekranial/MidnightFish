@@ -16,8 +16,9 @@ lvl_req:
 treasures:
   Depth_pearl:
     rarity: legendary
-    chance: 1
+    chance: 100
     lvl: 18
+    model: depth_pearl
 
 garbage:
   common:
@@ -28,6 +29,9 @@ garbage:
   rare:
     Statuette: {}
     Rusty_ring: {}
+  legendary:
+    Community:
+      model: community
 
 colors:
   legendary: "&6"
@@ -452,6 +456,10 @@ biomes:
         small-weight-interval: 0.55-0.8
         medium-weight-interval: 0.8-1.1
         big-weight-interval: 1.1-2.1
+
+        small-model: herring_1
+        medium-model: herring_2
+        big-model: herring_3
       Anchovy:
         small-weight-interval: 0.001-0.006
         medium-weight-interval: 0.006-0.01

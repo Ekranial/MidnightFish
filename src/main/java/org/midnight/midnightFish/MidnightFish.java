@@ -40,6 +40,7 @@ public final class MidnightFish extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PrepareCraft(), this);
         Bukkit.getPluginManager().registerEvents(new TradeListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerJoin(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerEnchant(), this);
 
         Bukkit.getPluginCommand("mfish").setExecutor(new Mfish());
 

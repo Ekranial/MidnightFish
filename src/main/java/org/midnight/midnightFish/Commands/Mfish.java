@@ -151,7 +151,7 @@ public class Mfish implements CommandExecutor {
         }
         if (strings[0].equals("test")) {
 
-            TestCmd.execute((Player) commandSender);
+            TestCmd.execute((Player) commandSender, strings[1]);
 
             return false;
         }

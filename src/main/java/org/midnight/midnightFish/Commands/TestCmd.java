@@ -14,6 +14,7 @@ import org.bukkit.inventory.MerchantRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import org.midnight.midnightFish.Rods.Rod;
 import org.midnight.midnightFish.Treasures.Treasure;
 
 import java.math.RoundingMode;
@@ -27,28 +28,38 @@ import static org.midnight.midnightFish.Utils.ProcUtils.Proc;
 
 public class TestCmd {
 
-    public static void execute(Player player){
+    public static void execute(Player player, String rodtype){
         if (!player.getName().equals("Ekran1al")) return;
 
-        Bukkit.getScheduler().scheduleAsyncDelayedTask(pl, () -> {
-            double num = 1000000;
-            double c = 0;
-            for(int i = 0; i < num; i++) {
-                for (Treasure treasure : Treasures) {
-                    if (Proc(treasure.DropChance) && GetPlrLvl(player.getName()).first() >= treasure.LvlReq) {
-                        c += 1;
-                        break;
-                    }
-                }
-            }
+        Rod rod = new Rod(rodtype);
+        ItemStack itemStack = rod.GetRodItemStack();
 
-            DecimalFormat df = new DecimalFormat("#.######");
-            df.setRoundingMode(RoundingMode.FLOOR);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.getPersistentDataContainer().set(new NamespacedKey("midnightcore", "enchantment"), PersistentDataType.BOOLEAN, true);
+        itemMeta.addEnchant(Enchantment.LURE, 255, true);
+        itemMeta.setItemName(rod.Name);
+        itemStack.setItemMeta(itemMeta);
+        player.setItemInHand(itemStack);
 
-            player.sendMessage("Total tries: " + num +
-                    "\nProced: " + c +
-                    "\nChance: " + df.format(c / num * 100));
-        }, 0);
+//        Bukkit.getScheduler().scheduleAsyncDelayedTask(pl, () -> {
+//            double num = 1000000;
+//            double c = 0;
+//            for(int i = 0; i < num; i++) {
+//                for (Treasure treasure : Treasures) {
+//                    if (Proc(treasure.DropChance) && GetPlrLvl(player.getName()).first() >= treasure.LvlReq) {
+//                        c += 1;
+//                        break;
+//                    }
+//                }
+//            }
+//
+//            DecimalFormat df = new DecimalFormat("#.######");
+//            df.setRoundingMode(RoundingMode.FLOOR);
+//
+//            player.sendMessage("Total tries: " + num +
+//                    "\nProced: " + c +
+//                    "\nChance: " + df.format(c / num * 100));
+//        }, 0);
 
 //        Merchant merchant = Bukkit.createMerchant("aboba");
 //

@@ -1,7 +1,5 @@
 package org.midnight.midnightFish.Treasures;
 
-import javax.annotation.Nullable;
-
 public class Treasure {
     public String Name;
     public String Rarity;

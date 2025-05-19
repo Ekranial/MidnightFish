@@ -4,6 +4,7 @@ import it.unimi.dsi.fastutil.Pair;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.block.Biome;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
@@ -15,6 +16,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.components.CustomModelDataComponent;
 import org.bukkit.persistence.PersistentDataType;
 import org.midnight.midnightFish.Garbage.Garbage;
+import org.midnight.midnightFish.Rods.Rod;
 import org.midnight.midnightFish.Treasures.Treasure;
 
 import java.math.RoundingMode;
@@ -38,7 +40,14 @@ public class FishLoot implements Listener {
             }
 
             Player player = event.getPlayer();
+            Rod rod = new Rod(player.getInventory().getItem(event.getHand()).getPersistentDataContainer().get(
+                    new NamespacedKey(pl, "specialrod"), PersistentDataType.STRING
+            ));
             String biome = event.getHook().getLocation().getBlock().getBiome().toString();
+            if (!rod.IsBiomeCorrect(Biome.valueOf(biome))) {
+                event.setCancelled(true);
+                return;
+            }
 //            player.sendMessage(biome);
 
             for (Treasure treasure : Treasures) {

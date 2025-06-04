@@ -1,0 +1,188 @@
+package org.midnight.midnightFish.Listeners;
+
+import it.unimi.dsi.fastutil.Pair;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.block.Biome;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.Item;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerFishEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.components.CustomModelDataComponent;
+import org.bukkit.persistence.PersistentDataType;
+import org.midnight.midnightFish.Garbage.Garbage;
+import org.midnight.midnightFish.Rods.Rod;
+import org.midnight.midnightFish.Treasures.Treasure;
+
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.util.*;
+
+import static org.midnight.midnightFish.MidnightFish.*;
+import static org.midnight.midnightFish.Utils.InitializeConfigValues.*;
+import static org.midnight.midnightFish.Utils.Leaderstats.UpdateLeaderstats;
+import static org.midnight.midnightFish.Utils.Levels.GetPlrLvl;
+import static org.midnight.midnightFish.Utils.Levels.UpdateLevel;
+import static org.midnight.midnightFish.Utils.ProcUtils.Proc;
+
+public class FishLoot implements Listener {
+    @EventHandler
+    private static void FishCatch(PlayerFishEvent event) {
+
+        if (event.getState().equals(PlayerFishEvent.State.CAUGHT_FISH)) {
+            if (!event.getPlayer().getInventory().getItem(event.getHand()).getPersistentDataContainer().has(new NamespacedKey(pl, "specialrod"))) {
+                return;
+            }
+
+            Player player = event.getPlayer();
+            Rod rod = new Rod(player.getInventory().getItem(event.getHand()).getPersistentDataContainer().get(
+                    new NamespacedKey(pl, "specialrod"), PersistentDataType.STRING
+            ));
+            String biome = event.getHook().getLocation().getBlock().getBiome().toString();
+            if (!rod.IsBiomeCorrect(Biome.valueOf(biome))) {
+                event.setCancelled(true);
+                return;
+            }
+//            player.sendMessage(biome);
+
+            for (Treasure treasure : Treasures) {
+                if (Proc(treasure.DropChance) && GetPlrLvl(player.getName()).first() >= treasure.LvlReq) {
+                    GrantTreasureLoot(event, player, treasure);
+                    return;
+                }
+            }
+
+            if (Proc(GarbageChance) || !Biomes.containsKey(biome)) {
+                for (String Rarity : new ArrayList<String>(Arrays.asList("legendary", "epic", "rare"))) {
+                    if (Proc(RarityChances.get(Rarity)) && !Garbage.get(Rarity).isEmpty()) {
+                        GrantGarbageLoot(event, player, Rarity);
+                        return;
+                    }
+                }
+                GrantGarbageLoot(event, player, "common");
+            } else {
+                for (String Rarity : new ArrayList<String>(Arrays.asList("legendary", "epic", "rare"))) {
+                    if (Proc(RarityChances.get(Rarity)) && !Biomes.get(biome).get(Rarity).isEmpty() &&
+                    GetPlrLvl(player.getName()).first() >= RarityLvlReq.get(Rarity)) {
+                        GrantFishLoot(event, biome, player, Rarity);
+                        return;
+                    }
+                }
+                GrantFishLoot(event, biome, player, "common");
+            }
+        }
+    }
+
+    private static void GrantGarbageLoot(PlayerFishEvent event, Player player, String rarity) {
+        ArrayList<org.midnight.midnightFish.Garbage.Garbage> LootList = Garbage.get(rarity);
+        Random random = new Random();
+        org.midnight.midnightFish.Garbage.Garbage CurGarbage = LootList.get(random.nextInt(LootList.size()));
+        String ItemName = CurGarbage.Name;
+
+        ItemStack itemStack = new ItemStack(Material.IRON_NUGGET);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.getPersistentDataContainer().set(new NamespacedKey(pl, "garbagedrop"), PersistentDataType.STRING, ItemName);
+        itemMeta.setItemName(ChatColor.translateAlternateColorCodes('&',
+                RarityColors.getOrDefault(rarity, "&f") +
+                        Translates.getOrDefault(ItemName, ItemName)));
+
+        if (CurGarbage.CustomModelData != null) {
+            CustomModelDataComponent customModelDataComponent = itemMeta.getCustomModelDataComponent();
+            customModelDataComponent.setStrings(Collections.singletonList(CurGarbage.CustomModelData));
+            itemMeta.setCustomModelDataComponent(customModelDataComponent);
+        }
+
+        itemStack.setItemMeta(itemMeta);
+
+        Item item = (Item) event.getCaught();
+        item.setItemStack(itemStack);
+    }
+
+    private static void GrantFishLoot(PlayerFishEvent event, String biome, Player player, String rarity) {
+        ArrayList<String> LootList = Biomes.get(biome).get(rarity);
+        Random random = new Random();
+        String ItemName = LootList.get(random.nextInt(LootList.size()));
+
+        ItemStack itemStack = new ItemStack(Material.IRON_NUGGET);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.getPersistentDataContainer().set(new NamespacedKey(pl, "fishdrop"), PersistentDataType.STRING, ItemName);
+        itemMeta.setItemName(ChatColor.translateAlternateColorCodes('&',
+                RarityColors.getOrDefault(rarity, "&f") +
+                        Translates.getOrDefault(ItemName, ItemName)));
+        Pair<String, String> WeightPair = GetFishWeight(biome, rarity, ItemName);
+        itemMeta.setLore(Collections.singletonList((ChatColor.GRAY + WeightPair.left() + " кг")));
+        CustomModelDataComponent customModelDataComponent = itemMeta.getCustomModelDataComponent();
+        customModelDataComponent.setStrings(Collections.singletonList(GetFishModel(biome, rarity, ItemName, WeightPair.right())));
+        itemMeta.setCustomModelDataComponent(customModelDataComponent);
+
+        itemStack.setItemMeta(itemMeta);
+
+        UpdateLeaderstats(player, ItemName, Double.parseDouble(WeightPair.left()));
+        UpdateLevel(player, ItemName);
+
+        Item item = (Item) event.getCaught();
+        item.setItemStack(itemStack);
+    }
+
+    private static Pair<String, String> GetFishWeight(String biome, String fish_rarity, String fish) {
+        for (String Rarity : new ArrayList<String>(Arrays.asList("big", "medium"))) {
+            if (Proc(WeightChances.get(Rarity))) {
+                double w1 = Double.parseDouble(pl.getConfig().getString("biomes." + biome + "." + fish_rarity +
+                        "." + fish + "." + Rarity + "-weight-interval").split("-")[0]);
+                double w2 = Double.parseDouble(pl.getConfig().getString("biomes." + biome + "." + fish_rarity +
+                        "." + fish + "." + Rarity + "-weight-interval").split("-")[1]);
+
+                DecimalFormat df = new DecimalFormat("#.###");
+                df.setRoundingMode(RoundingMode.FLOOR);
+
+                Random random = new Random();
+                return Pair.of(df.format(random.nextDouble(w1, w2)), Rarity);
+            }
+        }
+        String Rarity = "small";
+        double w1 = Double.parseDouble(pl.getConfig().getString("biomes." + biome + "." + fish_rarity +
+                "." + fish + "." + Rarity + "-weight-interval").split("-")[0]);
+        double w2 = Double.parseDouble(pl.getConfig().getString("biomes." + biome + "." + fish_rarity +
+                "." + fish + "." + Rarity + "-weight-interval").split("-")[1]);
+
+        DecimalFormat df = new DecimalFormat("#.###");
+        df.setRoundingMode(RoundingMode.FLOOR);
+
+        Random random = new Random();
+        return Pair.of(df.format(random.nextDouble(w1, w2)), Rarity);
+    }
+
+    private static String GetFishModel(String biome, String fish_rarity, String fish, String weight_rarity) {
+        ConfigurationSection CurrentFishSection = pl.getConfig().getConfigurationSection("biomes." + biome + "." + fish_rarity +
+                "." + fish);
+        if (!CurrentFishSection.contains(weight_rarity + "-model")) return "iron_nugget";
+        return (CurrentFishSection.getString(weight_rarity + "-model"));
+    }
+
+    private static void GrantTreasureLoot(PlayerFishEvent event, Player player, Treasure treasure) {
+        String ItemName = treasure.Name;
+
+        ItemStack itemStack = new ItemStack(Material.IRON_NUGGET);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.getPersistentDataContainer().set(new NamespacedKey(pl, "treasuredrop"), PersistentDataType.STRING, ItemName);
+        itemMeta.setItemName(ChatColor.translateAlternateColorCodes('&',
+                RarityColors.getOrDefault(treasure.Rarity, "&f") +
+                        Translates.getOrDefault(ItemName, ItemName)));
+
+//        System.out.println(treasure.CustomModelData);
+        if (treasure.CustomModelData != null) {
+            CustomModelDataComponent customModelDataComponent = itemMeta.getCustomModelDataComponent();
+            customModelDataComponent.setStrings(Collections.singletonList(treasure.CustomModelData));
+            itemMeta.setCustomModelDataComponent(customModelDataComponent);
+        }
+
+        itemStack.setItemMeta(itemMeta);
+        Item item = (Item) event.getCaught();
+        item.setItemStack(itemStack);
+    }
+}

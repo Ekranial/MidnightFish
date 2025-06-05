@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class ProcUtils {
 
-    public static Random random = new Random();
+    private static Random random = new Random();
 
     public static boolean Proc(double chance) {
         DecimalFormat df = new DecimalFormat("#.####");

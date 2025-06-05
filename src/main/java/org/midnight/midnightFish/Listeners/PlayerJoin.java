@@ -13,7 +13,7 @@ import static org.midnight.midnightFish.Utils.InitializeConfigValues.RpUrl;
 public class PlayerJoin implements Listener {
 
     @EventHandler
-    public static void PlayerJoin(PlayerJoinEvent event) {
+    private static void PlayerJoin(PlayerJoinEvent event) {
 
         UUID uuid = UUID.nameUUIDFromBytes("MFish".getBytes());
         System.out.println(uuid);

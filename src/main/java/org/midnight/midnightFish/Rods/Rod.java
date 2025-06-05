@@ -3,22 +3,26 @@ package org.midnight.midnightFish.Rods;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Biome;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.io.File;
+import java.util.*;
 
+import static org.midnight.midnightFish.MidnightFish.LeaderstatsConfigFile;
 import static org.midnight.midnightFish.MidnightFish.pl;
+import static org.midnight.midnightFish.Utils.InitializeConfigValues.FishRarities;
+import static org.midnight.midnightFish.Utils.InitializeConfigValues.GetDefaultRaritiesHashMap;
 
 public class Rod {
     public String Name;
-    public String Rarity;
-    public String CustomModelData;
-    public ArrayList<Biome> Biomes;
+    private String Rarity;
+    private String CustomModelData;
+    private ArrayList<Biome> Biomes;
 
     public Rod(String Name, String Rarity, String Model) {
         this.Name = Name;
@@ -32,62 +36,16 @@ public class Rod {
         this.Rarity = null;
         this.CustomModelData = null;
         this.Biomes = new ArrayList<>();
-
-        switch (PDDValue){
-            case "command":
-                this.Biomes.addAll(Arrays.asList(Biome.values()));
-                break;
-            case "Snowy":
-                this.Biomes.add(Biome.SNOWY_PLAINS);
-                this.Biomes.add(Biome.SNOWY_TAIGA);
-                this.Biomes.add(Biome.FROZEN_RIVER);
-                break;
-            case "Taiga":
-                this.Biomes.add(Biome.TAIGA);
-                this.Biomes.add(Biome.OLD_GROWTH_PINE_TAIGA);
-                this.Biomes.add(Biome.OLD_GROWTH_SPRUCE_TAIGA);
-                this.Biomes.add(Biome.COLD_OCEAN);
-                this.Biomes.add(Biome.DEEP_COLD_OCEAN);
-                break;
-            case "Plains":
-                this.Biomes.add(Biome.PLAINS);
-                this.Biomes.add(Biome.OCEAN);
-                this.Biomes.add(Biome.DEEP_OCEAN);
-                this.Biomes.add(Biome.LUKEWARM_OCEAN);
-                this.Biomes.add(Biome.DEEP_LUKEWARM_OCEAN);
-                break;
-            case "Desert":
-                this.Biomes.add(Biome.SAVANNA);
-                this.Biomes.add(Biome.SAVANNA_PLATEAU);
-                this.Biomes.add(Biome.WARM_OCEAN);
-                this.Biomes.add(Biome.BADLANDS);
-                this.Biomes.add(Biome.BEACH);
-                break;
-            case "Cave":
-                this.Biomes.add(Biome.LUSH_CAVES);
-                this.Biomes.add(Biome.DEEP_DARK);
-                break;
-            case "Mountain":
-                this.Biomes.add(Biome.GROVE);
-                this.Biomes.add(Biome.SNOWY_SLOPES);
-                this.Biomes.add(Biome.FROZEN_PEAKS);
-                this.Biomes.add(Biome.JAGGED_PEAKS);
-                this.Biomes.add(Biome.MEADOW);
-                break;
-            case "Forest":
-                this.Biomes.add(Biome.RIVER);
-                this.Biomes.add(Biome.FOREST);
-                this.Biomes.add(Biome.CHERRY_GROVE);
-                this.Biomes.add(Biome.BIRCH_FOREST);
-                this.Biomes.add(Biome.DARK_FOREST);
-                this.Biomes.add(Biome.MANGROVE_SWAMP);
-                this.Biomes.add(Biome.JUNGLE);
-                break;
-            case "End":
-                this.Biomes.add(Biome.THE_END);
-                this.Biomes.add(Biome.END_HIGHLANDS);
-                break;
-        }
+        Map<String, List<Biome>> BIOME_MAPPINGS = Map.of(
+                "command", Arrays.asList(Biome.values()),
+                "Snowy", List.of(Biome.SNOWY_PLAINS, Biome.SNOWY_TAIGA, Biome.FROZEN_RIVER),
+                "Taiga", List.of(Biome.TAIGA, Biome.OLD_GROWTH_PINE_TAIGA, Biome.OLD_GROWTH_SPRUCE_TAIGA, Biome.COLD_OCEAN, Biome.DEEP_COLD_OCEAN),
+                "Plains", List.of(Biome.PLAINS, Biome.OCEAN, Biome.DEEP_OCEAN, Biome.LUKEWARM_OCEAN, Biome.DEEP_LUKEWARM_OCEAN),
+                "Desert", List.of(Biome.SAVANNA, Biome.SAVANNA_PLATEAU, Biome.WARM_OCEAN, Biome.BADLANDS, Biome.BEACH),
+                "Cave", List.of(Biome.LUSH_CAVES, Biome.DEEP_DARK),
+                "Mountain", List.of(Biome.GROVE, Biome.SNOWY_SLOPES, Biome.FROZEN_PEAKS, Biome.JAGGED_PEAKS, Biome.MEADOW),
+                "Forest", List.of(Biome.RIVER, Biome.FOREST, Biome.CHERRY_GROVE, Biome.BIRCH_FOREST, Biome.DARK_FOREST, Biome.MANGROVE_SWAMP, Biome.JUNGLE),
+                "End", List.of(Biome.THE_END, Biome.END_HIGHLANDS));
     }
 
     public boolean IsBiomeCorrect(Biome biome) {

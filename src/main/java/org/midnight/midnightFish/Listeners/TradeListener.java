@@ -29,7 +29,7 @@ public class TradeListener implements Listener {
     }
 
     @EventHandler
-    public static void PlayerTradeClick(PlayerInventorySlotChangeEvent event) {
+    private static void PlayerTradeClick(PlayerInventorySlotChangeEvent event) {
         return;
 //        System.out.println(event);
     }

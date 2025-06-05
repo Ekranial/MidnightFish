@@ -124,7 +124,7 @@ public class InitializeConfigValues {
         return rarities;
     }
 
-    public static HashMap<String, ArrayList<Garbage>> GetDefaultRaritiesGarbageHashMap() {
+    private static HashMap<String, ArrayList<Garbage>> GetDefaultRaritiesGarbageHashMap() {
         HashMap<String, ArrayList<Garbage>> rarities = new HashMap<>();
         rarities.put("legendary", new ArrayList<>());
         rarities.put("epic", new ArrayList<>());
@@ -134,7 +134,7 @@ public class InitializeConfigValues {
         return rarities;
     }
 
-    public static void ClearData() {
+    private static void ClearData() {
         Treasures.clear();
         RequiredExp.clear();
         RarityExp.clear();

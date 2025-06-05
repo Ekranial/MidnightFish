@@ -32,7 +32,7 @@ import static org.midnight.midnightFish.Utils.ProcUtils.Proc;
 
 public class FishLoot implements Listener {
     @EventHandler
-    public static void FishCatch(PlayerFishEvent event) {
+    private static void FishCatch(PlayerFishEvent event) {
 
         if (event.getState().equals(PlayerFishEvent.State.CAUGHT_FISH)) {
             if (!event.getPlayer().getInventory().getItem(event.getHand()).getPersistentDataContainer().has(new NamespacedKey(pl, "specialrod"))) {
@@ -78,7 +78,7 @@ public class FishLoot implements Listener {
         }
     }
 
-    public static void GrantGarbageLoot(PlayerFishEvent event, Player player, String rarity) {
+    private static void GrantGarbageLoot(PlayerFishEvent event, Player player, String rarity) {
         ArrayList<org.midnight.midnightFish.Garbage.Garbage> LootList = Garbage.get(rarity);
         Random random = new Random();
         org.midnight.midnightFish.Garbage.Garbage CurGarbage = LootList.get(random.nextInt(LootList.size()));
@@ -103,7 +103,7 @@ public class FishLoot implements Listener {
         item.setItemStack(itemStack);
     }
 
-    public static void GrantFishLoot(PlayerFishEvent event, String biome, Player player, String rarity) {
+    private static void GrantFishLoot(PlayerFishEvent event, String biome, Player player, String rarity) {
         ArrayList<String> LootList = Biomes.get(biome).get(rarity);
         Random random = new Random();
         String ItemName = LootList.get(random.nextInt(LootList.size()));
@@ -129,7 +129,7 @@ public class FishLoot implements Listener {
         item.setItemStack(itemStack);
     }
 
-    public static Pair<String, String> GetFishWeight(String biome, String fish_rarity, String fish) {
+    private static Pair<String, String> GetFishWeight(String biome, String fish_rarity, String fish) {
         for (String Rarity : new ArrayList<String>(Arrays.asList("big", "medium"))) {
             if (Proc(WeightChances.get(Rarity))) {
                 double w1 = Double.parseDouble(pl.getConfig().getString("biomes." + biome + "." + fish_rarity +
@@ -157,14 +157,14 @@ public class FishLoot implements Listener {
         return Pair.of(df.format(random.nextDouble(w1, w2)), Rarity);
     }
 
-    public static String GetFishModel(String biome, String fish_rarity, String fish, String weight_rarity) {
+    private static String GetFishModel(String biome, String fish_rarity, String fish, String weight_rarity) {
         ConfigurationSection CurrentFishSection = pl.getConfig().getConfigurationSection("biomes." + biome + "." + fish_rarity +
                 "." + fish);
         if (!CurrentFishSection.contains(weight_rarity + "-model")) return "iron_nugget";
         return (CurrentFishSection.getString(weight_rarity + "-model"));
     }
 
-    public static void GrantTreasureLoot(PlayerFishEvent event, Player player, Treasure treasure) {
+    private static void GrantTreasureLoot(PlayerFishEvent event, Player player, Treasure treasure) {
         String ItemName = treasure.Name;
 
         ItemStack itemStack = new ItemStack(Material.IRON_NUGGET);

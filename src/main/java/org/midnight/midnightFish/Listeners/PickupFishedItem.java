@@ -10,7 +10,7 @@ import static org.midnight.midnightFish.MidnightFish.pl;
 public class PickupFishedItem implements Listener {
 
     @EventHandler
-    public static void PickupFishedItem(PlayerPickupItemEvent event) {
+    private static void PickupFishedItem(PlayerPickupItemEvent event) {
         if (event.getItem().getPersistentDataContainer().has(new NamespacedKey(pl, "fishedmob"))) {
             event.setCancelled(true);
             event.getItem().remove();

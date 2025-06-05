@@ -17,7 +17,7 @@ import static org.midnight.midnightFish.Utils.InitializeMobList.MobTypes;
 public class FishMobs implements Listener {
 
     @EventHandler
-    public static void FishCatch(PlayerFishEvent event) {
+    private static void FishCatch(PlayerFishEvent event) {
         if (event.getState().equals(PlayerFishEvent.State.CAUGHT_FISH)) {
 
             if (event.getPlayer().getInventory().getItem(event.getHand()).getPersistentDataContainer().has(new NamespacedKey(pl, "specialrod"))) {

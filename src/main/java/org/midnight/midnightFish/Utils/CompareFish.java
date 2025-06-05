@@ -19,13 +19,11 @@ public class CompareFish implements Comparator<Pair<String, Pair<String, Double>
         String RarityFish2 = FishRarities.getOrDefault(o2.left(), "common");
 
 //        System.out.println(RarityOrder.indexOf(RarityFish1) + " " + RarityOrder.indexOf(RarityFish2));
-        if (RarityOrder.indexOf(RarityFish1) < RarityOrder.indexOf(RarityFish2)) return -1;
-        if (RarityOrder.indexOf(RarityFish1) > RarityOrder.indexOf(RarityFish2)) return 1;
+        if (RarityOrder.indexOf(RarityFish1) < RarityOrder.indexOf(RarityFish2))
+            return -1;
+        if (RarityOrder.indexOf(RarityFish1) > RarityOrder.indexOf(RarityFish2))
+            return 1;
 
-        if (o1.right().right() - o2.right().right() > 0) return -1;
-        else if (o1.right().right() - o2.right().right() == 0) return 0;
-        else if (o1.right().right() - o2.right().right() < 0) return 1;
-
-        return 1;
+        return Double.compare(o2.right().right(), o1.right().right());
     }
 }

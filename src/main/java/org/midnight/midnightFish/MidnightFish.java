@@ -1,15 +1,18 @@
 package org.midnight.midnightFish;
 
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.midnight.midnightFish.Commands.MFishCommands;
+import org.midnight.midnightFish.Commands.Mfish;
 import org.midnight.midnightFish.Listeners.*;
 import org.midnight.midnightFish.Utils.InitializeConfigValues;
 import org.midnight.midnightFish.Utils.InitializeMobList;
 
 import java.io.File;
+import java.io.IOException;
 
 import static org.midnight.midnightFish.Utils.Leaderstats.CreateLsConfig;
 import static org.midnight.midnightFish.Utils.Levels.CreateLvlsConfig;
@@ -27,7 +30,6 @@ public final class MidnightFish extends JavaPlugin {
         // Plugin startup logic
         pl = this;
 
-
         pl.saveDefaultConfig();
         CreateLsConfig();
         CreateLvlsConfig();
@@ -40,7 +42,7 @@ public final class MidnightFish extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerJoin(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerEnchant(), this);
 
-        MFishCommands.register(this);
+        Bukkit.getPluginCommand("mfish").setExecutor(new Mfish());
 
         InitializeMobList.Init();
         InitializeConfigValues.Init();

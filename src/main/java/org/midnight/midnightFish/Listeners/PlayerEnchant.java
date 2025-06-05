@@ -12,17 +12,17 @@ import org.bukkit.inventory.ItemStack;
 public class PlayerEnchant implements Listener {
 
     @EventHandler
-    public static void PlayerEnchant(PrepareItemEnchantEvent event) {
+    private static void PlayerEnchant(PrepareItemEnchantEvent event) {
         event.setCancelled(true);
     }
 
     @EventHandler
-    public static void PlayerAnvil(PrepareAnvilEvent event) {
+    private static void PlayerAnvil(PrepareAnvilEvent event) {
         event.setResult(null);
     }
 
     @EventHandler
-    public static void InvChange(PlayerInventorySlotChangeEvent event) {
+    private static void InvChange(PlayerInventorySlotChangeEvent event) {
         ItemStack item = event.getNewItemStack();
 
 //        System.out.println(event.getSlot());

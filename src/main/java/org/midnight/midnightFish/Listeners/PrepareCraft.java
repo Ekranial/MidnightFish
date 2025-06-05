@@ -12,7 +12,7 @@ import static org.midnight.midnightFish.MidnightFish.pl;
 public class PrepareCraft implements Listener {
 
     @EventHandler
-    public static void PrepareCraftEvent(PrepareItemCraftEvent event) {
+    private static void PrepareCraftEvent(PrepareItemCraftEvent event) {
         for (ItemStack itemStack : event.getInventory().getMatrix()) {
             if (itemStack != null) {
                 if (itemStack.getPersistentDataContainer().has(new NamespacedKey(pl, "fishdrop")) ||

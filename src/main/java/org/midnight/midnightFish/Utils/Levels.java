@@ -80,7 +80,7 @@ public class Levels {
         }
     }
 
-    public static Pair<Integer, Double> GetNewLvl(Integer CurLvl, Double CurExp, Double AddedExp) {
+    private static Pair<Integer, Double> GetNewLvl(Integer CurLvl, Double CurExp, Double AddedExp) {
         double NewExp = CurExp + AddedExp;
         int NewLvl = CurLvl;
 

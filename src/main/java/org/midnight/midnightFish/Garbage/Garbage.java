@@ -11,9 +11,21 @@ public class Garbage {
         this.CustomModelData = Model;
     }
 
-    public Garbage(String Name, String Rarity) {
+    public String getName() {
+        return Name;
+    }
+
+    public String getRarity() {
+        return Rarity;
+    }
+
+    public String getCustomModelData() {
+        return CustomModelData;
+    }
+
+    /*public Garbage(String Name, String Rarity) {
         this.Name = Name;
         this.Rarity = Rarity;
         this.CustomModelData = null;
-    }
+    }*/
 }
